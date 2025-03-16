@@ -1,4 +1,3 @@
-
 import { BiographyCardProps } from "@/components/BiographyCard";
 
 // Mock for featured biographies on the homepage
@@ -204,7 +203,7 @@ export const sampleBiography = {
 
 Albert Einstein was born on March 14, 1879, in Ulm, in the Kingdom of Württemberg in the German Empire. His parents were Hermann Einstein, a salesman and engineer, and Pauline Koch. In 1880, the family moved to Munich, where Einstein's father and his uncle Jakob founded Elektrotechnische Fabrik J. Einstein & Cie, a company that manufactured electrical equipment based on direct current.
 
-Einstein's intellectual achievements and originality have made the word "Einstein" synonymous with "genius." In 1894, Hermann and Jakob's company lost a bid to supply the city of Munich with electrical lighting because they lacked the capital to convert their equipment from the direct current (DC) standard to the more efficient alternating current (AC) standard. The loss of the company's bid forced the sale of the Munich factory. In search of business, the Einstein family moved to Italy, first to Milan and a few months later to Pavia.
+Einstein's intellectual achievements and originality have made the word "Einstein" synonymous with "genius". In 1894, Hermann and Jakob's company lost a bid to supply the city of Munich with electrical lighting because they lacked the capital to convert their equipment from the direct current (DC) standard to the more efficient alternating current (AC) standard. The loss of the company's bid forced the sale of the Munich factory. In search of business, the Einstein family moved to Italy, first to Milan and a few months later to Pavia.
 
 ## Career and Scientific Contributions
 
@@ -276,6 +275,11 @@ export const mockDeaths = [
   {
     id: "frida-kahlo",
     name: "Frida Kahlo",
+    deathDate: new Date().toISOString().split('T')[0].replace(/-\d+$/, `-${new Date().getDate()}`)
+  },
+  {
+    id: "william-shakespeare",
+    name: "William Shakespeare",
     deathDate: new Date().toISOString().split('T')[0].replace(/-\d+$/, `-${new Date().getDate()}`)
   }
 ];
