@@ -1,3 +1,4 @@
+
 import { BiographyCardProps } from "@/components/BiographyCard";
 
 // Mock for featured biographies on the homepage
@@ -281,5 +282,93 @@ export const mockDeaths = [
     id: "william-shakespeare",
     name: "William Shakespeare",
     deathDate: new Date().toISOString().split('T')[0].replace(/-\d+$/, `-${new Date().getDate()}`)
+  },
+  {
+    id: "st-patrick",
+    name: "Saint Patrick",
+    deathDate: "0461-03-17" // Saint Patrick died on March 17, 461 AD
+  },
+  {
+    id: "nat-king-cole",
+    name: "Nat King Cole",
+    deathDate: "1965-03-17" // Nat King Cole died on March 17, 1965
+  },
+  {
+    id: "marcus-aurelius",
+    name: "Marcus Aurelius",
+    deathDate: "0180-03-17" // Marcus Aurelius died on March 17, 180 AD
   }
 ];
+
+// Add a new detailed biography for Nat King Cole who died on March 17
+export const natKingColeBio = {
+  id: "nat-king-cole",
+  name: "Nat King Cole",
+  fullName: "Nathaniel Adams Coles",
+  mainImage: "https://images.unsplash.com/photo-1614149162883-504ce4d13909?q=80&w=1074&auto=format&fit=crop",
+  birthDate: "March 17, 1919",
+  birthPlace: "Montgomery, Alabama, United States",
+  deathDate: "March 17, 1965",
+  deathPlace: "Santa Monica, California, United States",
+  causeOfDeath: "Lung cancer",
+  category: "Music",
+  tags: ["Jazz", "Vocalist", "Pianist", "Civil Rights"],
+  summary: "American jazz pianist and vocalist who recorded over 100 songs that became hits on the pop charts, and was the first African-American man to host a national television show.",
+  content: `
+## Early Life and Career
+
+Nathaniel Adams Coles was born on March 17, 1919, in Montgomery, Alabama. He received music lessons from his mother and his family moved to Chicago when he was four years old. There his father became a Baptist minister. Cole began formal lessons at 12, learning jazz, gospel, and classical music on piano. When he was 15, he dropped out of school to become a full-time jazz pianist.
+
+In 1937, after touring with a revival of the musical "Shuffle Along," Cole began playing in nightclubs. He formed the King Cole Trio with Oscar Moore (guitar) and Wesley Prince (bass), a group that became widely influential in the small jazz combo scene.
+
+## Rise to Fame
+
+Cole's soft baritone voice and elegant piano playing helped him find success as both an instrumentalist and a vocalist. His first mainstream vocal hit was "Straighten Up and Fly Right" (1943), based on a folk tale his father had used in a sermon. 
+
+Although he never considered himself a jazz singer, his impact on the genre was unmistakable. By the 1950s, Cole had abandoned his jazz roots and emerged as a leading pop music singer, renowned for his warm, relaxed voice that was particularly suited to ballads.
+
+## Breaking Racial Barriers
+
+Cole was the first African American performer to host a variety television series. "The Nat King Cole Show" debuted on NBC in 1956 and ran until 1957, when it was canceled due to lack of a national sponsor. Cole had a number of hits during the 1950s and early 1960s, including "Mona Lisa," "Too Young," "Unforgettable," and "Those Lazy-Hazy-Crazy Days of Summer."
+
+He also appeared in films, including "St. Louis Blues" (1958) and "Cat Ballou" (1965), which was released months after his death.
+
+## Legacy
+
+Cole died from lung cancer on February 15, 1965, at age 45. His last album, "L-O-V-E," was recorded in December 1964, just a few days before he entered the hospital for cancer treatment.
+
+Cole's daughter Natalie later followed in her father's musical footsteps. In 1991, she recorded a duet with her father's 1961 recording of "Unforgettable" using new technology, which became an enormous success.
+
+Nat King Cole's legacy extends beyond his music to his role in fighting racial prejudice and opening doors for other African American entertainers.
+  `,
+  images: [
+    {
+      src: "https://images.unsplash.com/photo-1614149162883-504ce4d13909?q=80&w=1074&auto=format&fit=crop",
+      alt: "Nat King Cole",
+      caption: "Nat King Cole performing in the early 1960s"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=1170&auto=format&fit=crop",
+      alt: "Vintage record player",
+      caption: "Cole's music was a staple on record players across America"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1465847899084-d164df4dedc6?q=80&w=1170&auto=format&fit=crop",
+      alt: "Piano Keys",
+      caption: "Nat King Cole was an exceptional jazz pianist before becoming known primarily as a vocalist"
+    }
+  ],
+  video: "https://www.youtube.com/embed/watch?v=JFyuOEovTOE",
+  website: "https://www.natking cole.com/",
+  socialLinks: [
+    {
+      platform: "Official Website",
+      url: "https://www.natkingcole.com/"
+    },
+    {
+      platform: "Grammy Hall of Fame",
+      url: "https://www.grammy.com/grammys/artists/nat-king-cole"
+    }
+  ]
+};
+
