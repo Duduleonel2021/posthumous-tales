@@ -1,5 +1,5 @@
 
-import { Search, Palette, Users, Film, Music, Briefcase, BookOpen, Newspaper, Globe, GraduationCap, Flask, Shield, Heart, Shirt } from "lucide-react"
+import { Search, Palette, Users, Film, Music, Briefcase, BookOpen, Newspaper, Globe, GraduationCap, Beaker, Shield, Heart, Shirt } from "lucide-react"
 import { Link } from "react-router-dom"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
@@ -14,7 +14,7 @@ const categoryIcons = {
   "journalism": <Newspaper className="w-4 h-4 mr-1" />,
   "internet": <Globe className="w-4 h-4 mr-1" />,
   "education": <GraduationCap className="w-4 h-4 mr-1" />,
-  "science": <Flask className="w-4 h-4 mr-1" />,
+  "science": <Beaker className="w-4 h-4 mr-1" />,
   "crime": <Shield className="w-4 h-4 mr-1" />,
   "health": <Heart className="w-4 h-4 mr-1" />,
   "fashion": <Shirt className="w-4 h-4 mr-1" />

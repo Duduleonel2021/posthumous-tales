@@ -1,7 +1,7 @@
 
 import BiographyCard, { BiographyCardProps } from "./BiographyCard";
 import { Link } from "react-router-dom";
-import { ChevronRight, Palette, Users, Film, Music, Briefcase, BookOpen, Newspaper, Globe, GraduationCap, Flask, Shield, Heart, Shirt } from "lucide-react";
+import { ChevronRight, Palette, Users, Film, Music, Briefcase, BookOpen, Newspaper, Globe, GraduationCap, Beaker, Shield, Heart, Shirt } from "lucide-react";
 
 interface CategorySectionProps {
   title: string;
@@ -19,7 +19,7 @@ const categoryIcons: Record<string, JSX.Element> = {
   "journalism": <Newspaper className="w-5 h-5" />,
   "internet": <Globe className="w-5 h-5" />,
   "education": <GraduationCap className="w-5 h-5" />,
-  "science": <Flask className="w-5 h-5" />,
+  "science": <Beaker className="w-5 h-5" />,
   "crime": <Shield className="w-5 h-5" />,
   "health": <Heart className="w-5 h-5" />,
   "fashion": <Shirt className="w-5 h-5" />,
