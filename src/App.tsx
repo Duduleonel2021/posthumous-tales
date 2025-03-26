@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import BiographyDetail from "./pages/BiographyDetail";
 import BiographyEdit from "./pages/BiographyEdit";
 import CategoryPage from "./pages/CategoryPage";
+import AlphabeticalBiographies from "./pages/AlphabeticalBiographies";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,8 @@ const App = () => (
           <Route path="/biography/:id" element={<BiographyDetail />} />
           <Route path="/biography/:id/edit" element={<BiographyEdit />} />
           <Route path="/category/:slug" element={<CategoryPage />} />
+          <Route path="/biographies" element={<AlphabeticalBiographies />} />
+          <Route path="/deaths-on-this-day" element={<NotFound />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

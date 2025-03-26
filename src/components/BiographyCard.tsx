@@ -27,6 +27,10 @@ const BiographyCard = ({
           src={image}
           alt={name}
           className="object-cover w-full h-48"
+          onError={(e) => {
+            (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1519791883288-dc8bd696e667?q=80&w=1170&auto=format&fit=crop";
+            (e.target as HTMLImageElement).alt = "Placeholder image";
+          }}
         />
       </Link>
       <div className="p-4">

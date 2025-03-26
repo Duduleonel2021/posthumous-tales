@@ -21,39 +21,32 @@ const TodayDeaths = () => {
 
   useEffect(() => {
     // In a real app, this would fetch from an API
-    // For now, we're using mock data
-    setTimeout(() => {
-      const filteredDeaths = mockDeaths.filter(death => {
+    const loadDeaths = () => {
+      let filteredDeaths = mockDeaths.filter(death => {
         const deathDate = new Date(death.deathDate);
         return deathDate.getMonth() + 1 === month && deathDate.getDate() === day;
       });
+      
+      // If no deaths match today's date, use March 17th deaths as fallback
+      if (filteredDeaths.length === 0) {
+        filteredDeaths = mockDeaths.filter(death => {
+          const deathDate = new Date(death.deathDate);
+          return deathDate.getMonth() + 1 === 3 && deathDate.getDate() === 17;
+        });
+      }
       
       setDeathsToday(filteredDeaths.map(death => ({
         id: death.id,
         name: death.name,
         year: new Date(death.deathDate).getFullYear()
       })));
+      
       setIsLoading(false);
-    }, 600); // Simulate loading delay
+    };
+    
+    // Simulate loading delay
+    setTimeout(loadDeaths, 600);
   }, [month, day]);
-
-  // For development only - if no deaths match today's date, show March 17th deaths
-  useEffect(() => {
-    if (!isLoading && deathsToday.length === 0) {
-      setTimeout(() => {
-        const marchDeaths = mockDeaths.filter(death => {
-          const deathDate = new Date(death.deathDate);
-          return deathDate.getMonth() + 1 === 3 && deathDate.getDate() === 17;
-        });
-        
-        setDeathsToday(marchDeaths.map(death => ({
-          id: death.id,
-          name: death.name,
-          year: new Date(death.deathDate).getFullYear()
-        })));
-      }, 300);
-    }
-  }, [isLoading, deathsToday.length]);
 
   return (
     <Card className="bg-posthumous-gray border-posthumous-gold/20 shadow-md hover:shadow-lg transition-shadow">
