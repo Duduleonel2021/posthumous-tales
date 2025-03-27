@@ -1,4 +1,3 @@
-
 import { BiographyCardProps } from "@/components/BiographyCard";
 
 // Mock for featured biographies on the homepage
@@ -182,6 +181,17 @@ export const categoryBiographies: Record<string, BiographyCardProps[]> = {
       category: "Music",
       summary: "English singer and songwriter known for her deep, expressive vocals and eclectic mix of musical genres."
     }
+  ],
+  sports: [
+    {
+      id: "joe-start",
+      name: "Joe Start",
+      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=1170&auto=format&fit=crop",
+      birthYear: 1842,
+      deathYear: 1927,
+      category: "Sports",
+      summary: "American professional baseball first baseman who played in the National Association and Major League Baseball from 1871 to 1886, primarily for the New York Mutuals and Providence Grays."
+    }
   ]
 };
 
@@ -300,6 +310,78 @@ export const mockDeaths = [
   }
 ];
 
+// Add Joe Start detailed biography
+export const joeStartBio = {
+  id: "joe-start",
+  name: "Joe Start",
+  fullName: "Joseph Start",
+  mainImage: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=1170&auto=format&fit=crop",
+  birthDate: "October 14, 1842",
+  birthPlace: "New York City, New York, United States",
+  deathDate: "March 27, 1927",
+  deathPlace: "Providence, Rhode Island, United States",
+  causeOfDeath: "Natural causes",
+  category: "Sports",
+  tags: ["Baseball", "First Baseman", "Manager", "New York Mutuals", "Providence Grays"],
+  summary: "American professional baseball first baseman who played in the National Association and Major League Baseball from 1871 to 1886, primarily for the New York Mutuals and Providence Grays.",
+  content: `
+## Early Life and Career
+
+Joseph Start was born on October 14, 1842, in New York City. He began his baseball career in the pre-professional era, playing for the Enterprise Club of Brooklyn in 1859, the Brooklyn Atlantics from 1862 to 1870, and the New York Mutuals from 1871 to 1876.
+
+Start was one of the most respected baseball players of his era, known for his exceptional fielding at first base and consistent hitting. He earned the nickname "Old Reliable" for his steady play and leadership.
+
+## Professional Career
+
+When the National Association formed as the first professional league in 1871, Start joined the New York Mutuals. He later played for the Providence Grays, Chicago White Stockings, and Washington Nationals. Throughout his career, Start was known for his exceptional defensive skills at first base.
+
+Some of Start's career highlights include:
+
+- Won multiple championships with the Brooklyn Atlantics in the amateur era
+- Played 16 seasons in professional baseball
+- Career batting average of .299
+- Led the National League in hits in 1878
+- Managed the Providence Grays in 1884
+
+## Later Life and Legacy
+
+After his playing career ended, Start settled in Providence, Rhode Island, where he had played for the Grays. He lived there until his death on March 27, 1927, at the age of 84.
+
+Joe Start is remembered as one of the pioneers of professional baseball, with a career that spanned from the sport's amateur beginnings through its development into an organized professional enterprise. While not as widely recognized as some of his contemporaries, baseball historians regard Start as one of the finest first basemen of the 19th century.
+
+Despite playing in an era before modern statistics were kept, Start's skills were widely acknowledged by his peers, and his longevity in the sport speaks to both his abilities and his passion for baseball.
+  `,
+  images: [
+    {
+      src: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=1170&auto=format&fit=crop",
+      alt: "Joe Start",
+      caption: "Joe Start during his playing days"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=1170&auto=format&fit=crop",
+      alt: "Vintage Baseball",
+      caption: "Baseball as it was played in the 19th century"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1170&auto=format&fit=crop",
+      alt: "Providence Grays",
+      caption: "The Providence Grays team that Start played for"
+    }
+  ],
+  video: "",
+  website: "",
+  socialLinks: [
+    {
+      platform: "Baseball Reference",
+      url: "https://www.baseball-reference.com/players/s/startjo01.shtml"
+    },
+    {
+      platform: "Baseball Hall of Fame",
+      url: "https://baseballhall.org/hall-of-famers"
+    }
+  ]
+};
+
 // Add a new detailed biography for Nat King Cole who died on March 17
 export const natKingColeBio = {
   id: "nat-king-cole",
@@ -359,7 +441,7 @@ Nat King Cole's legacy extends beyond his music to his role in fighting racial p
     }
   ],
   video: "https://www.youtube.com/embed/watch?v=JFyuOEovTOE",
-  website: "https://www.natking cole.com/",
+  website: "https://www.natkingcole.com/",
   socialLinks: [
     {
       platform: "Official Website",
@@ -371,4 +453,3 @@ Nat King Cole's legacy extends beyond his music to his role in fighting racial p
     }
   ]
 };
-

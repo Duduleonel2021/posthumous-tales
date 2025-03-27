@@ -7,13 +7,13 @@ import { categoryBiographies } from "@/data/mockData";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { User, Search } from "lucide-react";
+import AlphabeticalSearchBar from "@/components/AlphabeticalSearchBar";
 
 const AlphabeticalBiographies = () => {
   const [allBiographies, setAllBiographies] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedLetter, setSelectedLetter] = useState<string | null>(null);
-  const alphabet = "#ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
   useEffect(() => {
     // Gather all biographies from all categories
@@ -78,18 +78,10 @@ const AlphabeticalBiographies = () => {
             </div>
           </div>
           
-          <div className="flex flex-wrap gap-2 mb-8">
-            {alphabet.map(letter => (
-              <Button
-                key={letter}
-                variant={selectedLetter === letter ? "default" : "outline"} 
-                className={selectedLetter === letter ? "bg-posthumous-gold hover:bg-posthumous-gold/90" : ""}
-                onClick={() => setSelectedLetter(selectedLetter === letter ? null : letter)}
-              >
-                {letter}
-              </Button>
-            ))}
-          </div>
+          <AlphabeticalSearchBar 
+            onLetterSelect={setSelectedLetter} 
+            selectedLetter={selectedLetter} 
+          />
           
           {loading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

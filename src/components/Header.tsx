@@ -1,5 +1,5 @@
 
-import { Search, Palette, Users, Film, Music, Briefcase, BookOpen, Newspaper, Globe, GraduationCap, Beaker, Shield, Heart, Shirt } from "lucide-react"
+import { Search, Palette, Users, Film, Music, Briefcase, BookOpen, Newspaper, Globe, GraduationCap, Beaker, Shield, Heart, Shirt, ArrowDownAZ, Plus } from "lucide-react"
 import { Link } from "react-router-dom"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
@@ -32,7 +32,7 @@ const Header = () => {
               </h1>
             </Link>
           </div>
-          <div className="flex items-center w-full max-w-md gap-2">
+          <div className="flex items-center gap-2">
             <div className="relative flex-1">
               <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input
@@ -42,6 +42,16 @@ const Header = () => {
               />
             </div>
             <Button variant="outline" className="border-posthumous-navy/20 hover:bg-posthumous-gold hover:text-white">Search</Button>
+            <Link to="/biographies">
+              <Button variant="outline" className="border-posthumous-navy/20 hover:bg-posthumous-gold hover:text-white">
+                <ArrowDownAZ className="h-4 w-4 mr-1" /> A-Z
+              </Button>
+            </Link>
+            <Link to="/post-biography">
+              <Button className="bg-posthumous-navy hover:bg-posthumous-gold">
+                <Plus className="h-4 w-4 mr-1" /> Post Biography
+              </Button>
+            </Link>
           </div>
         </div>
         <nav className="flex items-center mt-2 space-x-1 overflow-x-auto pb-2 md:pb-0">
@@ -83,6 +93,9 @@ const Header = () => {
           </Link>
           <Link to="/category/fashion" className="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-posthumous-gold/10 hover:text-posthumous-navy transition-colors">
             {categoryIcons["fashion"]} Fashion
+          </Link>
+          <Link to="/category/sports" className="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-posthumous-gold/10 hover:text-posthumous-navy transition-colors">
+            <div className="w-4 h-4 mr-1" /> Sports
           </Link>
           <Link to="/category/others" className="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-posthumous-gold/10 hover:text-posthumous-navy transition-colors">
             <div className="w-4 h-4 mr-1" /> Others
