@@ -7,11 +7,55 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ImageCarousel from "@/components/ImageCarousel";
 import BiographySidebar from "@/components/BiographySidebar";
+import RelatedBiographiesHub from "@/components/RelatedBiographiesHub";
 import { sampleBiography } from "@/data/mockData";
+
+// Mock related biographies data (in a real app, this would come from an API)
+const getRelatedBiographies = (category: string) => {
+  return [
+    {
+      id: "winston-churchill",
+      name: "Winston Churchill",
+      image: "https://upload.wikimedia.org/wikipedia/commons/b/bc/Sir_Winston_Churchill_-_19086236948.jpg",
+      birthYear: 1874,
+      deathYear: 1965,
+      category: "Politics",
+      summary: "British statesman, soldier, and writer who served as Prime Minister of the United Kingdom."
+    },
+    {
+      id: "franklin-roosevelt",
+      name: "Franklin D. Roosevelt",
+      image: "https://upload.wikimedia.org/wikipedia/commons/4/42/FDR_1944_Color_Portrait.jpg",
+      birthYear: 1882,
+      deathYear: 1945,
+      category: "Politics",
+      summary: "American politician who served as the 32nd president of the United States."
+    },
+    {
+      id: "margaret-thatcher",
+      name: "Margaret Thatcher",
+      image: "https://upload.wikimedia.org/wikipedia/commons/2/20/Margaret_Thatcher_%281983%29.jpg",
+      birthYear: 1925,
+      deathYear: 2013,
+      category: "Politics",
+      summary: "British stateswoman who served as Prime Minister of the United Kingdom from 1979 to 1990."
+    },
+    {
+      id: "nelson-mandela",
+      name: "Nelson Mandela",
+      image: "https://upload.wikimedia.org/wikipedia/commons/0/02/Nelson_Mandela_1994.jpg",
+      birthYear: 1918,
+      deathYear: 2013,
+      category: "Politics",
+      summary: "South African anti-apartheid revolutionary, political leader, and philanthropist who served as President of South Africa."
+    }
+  ];
+};
 
 const BiographyDetail = () => {
   const { id } = useParams<{ id: string }>();
   const [biography, setBiography] = useState<any>(null);
+  const [relatedBiographies, setRelatedBiographies] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -19,6 +63,7 @@ const BiographyDetail = () => {
     // For now, we're using mock data
     setTimeout(() => {
       setBiography(sampleBiography);
+      setRelatedBiographies(getRelatedBiographies(sampleBiography.category));
       setLoading(false);
     }, 300);
   }, [id]);
@@ -104,6 +149,15 @@ const BiographyDetail = () => {
               <p className="text-xl text-gray-600 mb-6">
                 {biography.summary}
               </p>
+
+              <div className="flex items-center mb-6">
+                <Link 
+                  to={`/hub/${biography.category.toLowerCase().replace(/\s+/g, '-')}`}
+                  className="text-posthumous-gold hover:text-posthumous-darkgold transition-colors border-b border-posthumous-gold/30 pb-1"
+                >
+                  View all {biography.category} biographies in the hub →
+                </Link>
+              </div>
               
               <div className="biography-content" dangerouslySetInnerHTML={{ __html: biography.content }}></div>
             </div>
@@ -143,6 +197,14 @@ const BiographyDetail = () => {
               socialLinks={biography.socialLinks}
             />
           </div>
+        </div>
+
+        {/* Add the Related Biographies Hub component */}
+        <div className="mt-12">
+          <RelatedBiographiesHub 
+            categoryName={biography.category}
+            relatedBiographies={relatedBiographies}
+          />
         </div>
       </main>
       

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
 import { useState } from "react"
+import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "./ui/navigation-menu"
 
 const categoryIcons = {
   "arts": <Palette className="w-4 h-4 mr-1" />,
@@ -58,6 +59,30 @@ const Header = () => {
                 <ArrowDownAZ className="h-4 w-4 mr-1" /> A-Z
               </Button>
             </Link>
+            <NavigationMenu className="hidden md:flex">
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="border-posthumous-navy/10 hover:bg-posthumous-gold hover:text-white transition-colors">Hubs</NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                      {Object.entries(categoryIcons).map(([category, icon]) => (
+                        <li key={category}>
+                          <NavigationMenuLink asChild>
+                            <Link
+                              to={`/hub/${category}`}
+                              className="flex items-center p-2 rounded-md hover:bg-posthumous-gold/10 transition-colors"
+                            >
+                              {icon}
+                              <span className="ml-2">{category.charAt(0).toUpperCase() + category.slice(1)} Hub</span>
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+                      ))}
+                    </ul>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
             <Link to="/post-biography" className="hidden sm:block">
               <Button className="bg-posthumous-navy hover:bg-posthumous-gold transition-colors">
                 <Plus className="h-4 w-4 mr-1" /> Post Biography

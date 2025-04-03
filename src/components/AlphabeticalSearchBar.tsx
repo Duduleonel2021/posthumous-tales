@@ -1,7 +1,6 @@
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { ArrowDownAZ } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface AlphabeticalSearchBarProps {
   onLetterSelect: (letter: string | null) => void;
@@ -19,12 +18,12 @@ const AlphabeticalSearchBar = ({ onLetterSelect, selectedLetter }: AlphabeticalS
         </div>
         <h3 className="text-2xl font-playfair font-semibold text-posthumous-navy border-b-2 border-posthumous-gold/30 pb-1">Browse Alphabetically</h3>
       </div>
-      <div className="flex flex-wrap gap-2 md:gap-2.5">
+      <div className="flex flex-wrap justify-center md:justify-start gap-2 md:gap-2.5">
         {alphabet.map(letter => (
           <Button
             key={letter}
             variant={selectedLetter === letter ? "default" : "outline"} 
-            className={`min-w-9 md:min-w-11 h-9 md:h-11 p-1 md:p-2 rounded-md transition-all duration-300 ${
+            className={`min-w-10 h-10 p-1 rounded-md transition-all duration-300 ${
               selectedLetter === letter 
                 ? "bg-posthumous-gold hover:bg-posthumous-gold/90 text-white shadow-md scale-110"
                 : "border border-gray-200 hover:bg-posthumous-gold/10 hover:text-posthumous-gold hover:border-posthumous-gold/30"
