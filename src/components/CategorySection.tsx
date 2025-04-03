@@ -31,24 +31,38 @@ const CategorySection = ({ title, categorySlug, biographies }: CategorySectionPr
   const icon = categoryIcons[categorySlug] || categoryIcons["others"];
   
   return (
-    <div className="mb-16">
-      <div className="flex justify-between items-center mb-6">
+    <div className="mb-20 animate-fade-in">
+      <div className="flex justify-between items-center mb-8">
         <div className="flex items-center">
-          <div className="bg-posthumous-gold/10 p-2.5 rounded-full mr-3">
+          <div className="bg-posthumous-gold/15 p-3 rounded-full mr-4 shadow-sm">
             {React.cloneElement(icon as React.ReactElement, { className: "w-5 h-5 text-posthumous-gold" })}
           </div>
-          <h2 className="text-2xl font-playfair font-bold text-posthumous-navy border-b-2 border-posthumous-gold/30 pb-1">{title}</h2>
+          <h2 className="text-2xl md:text-3xl font-playfair font-bold text-posthumous-navy border-b-2 border-posthumous-gold/30 pb-1">
+            {title}
+          </h2>
         </div>
         <Link 
           to={`/category/${categorySlug}`}
-          className="flex items-center text-posthumous-navy hover:text-posthumous-gold transition-colors group"
+          className="flex items-center text-posthumous-navy hover:text-posthumous-gold transition-colors duration-300 group"
         >
-          <span className="font-medium">View All</span> <ChevronRight className="h-4 w-4 ml-1 transition-transform group-hover:translate-x-1" />
+          <span className="font-medium mr-1">View All</span> 
+          <ChevronRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
         </Link>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {biographies.slice(0, 4).map((biography) => (
-          <BiographyCard key={biography.id} {...biography} />
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        {biographies.slice(0, 4).map((biography, index) => (
+          <div 
+            key={biography.id} 
+            className="transform transition-all duration-500 hover:-translate-y-1 hover:shadow-lg"
+            style={{ 
+              animationDelay: `${index * 150}ms`,
+              opacity: 0,
+              animation: 'fadeIn 0.5s ease-out forwards'
+            }}
+          >
+            <BiographyCard {...biography} />
+          </div>
         ))}
       </div>
     </div>

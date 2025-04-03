@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -97,7 +97,7 @@
   }
 
   body {
-    @apply bg-background text-foreground font-inter;
+    @apply bg-gray-50 text-foreground font-inter;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
   }
 
@@ -106,8 +106,25 @@
   }
   
   /* Improved typography for better readability */
+  h1 {
+    @apply text-3xl md:text-5xl font-bold leading-tight;
+  }
+  
+  h2 {
+    @apply text-2xl md:text-4xl font-bold leading-tight;
+  }
+  
+  h3 {
+    @apply text-xl md:text-2xl font-semibold leading-snug;
+  }
+  
   p {
-    @apply text-base leading-relaxed;
+    @apply text-base leading-relaxed font-inter text-posthumous-text;
+  }
+  
+  /* Improved quote styling */
+  blockquote {
+    @apply pl-4 border-l-4 border-posthumous-gold italic text-lg text-gray-700;
   }
   
   /* Custom link styling */
@@ -134,36 +151,36 @@
 }
 
 .biography-content p {
-  @apply mb-4;
+  @apply mb-5 text-lg;
 }
 
 .biography-content a {
-  @apply text-posthumous-gold hover:text-posthumous-navy transition-colors;
+  @apply text-posthumous-gold hover:text-posthumous-navy transition-colors border-b border-posthumous-gold/30 hover:border-posthumous-navy;
 }
 
 .biography-content blockquote {
-  @apply border-l-4 border-posthumous-gold pl-4 italic text-gray-700 my-6;
+  @apply border-l-4 border-posthumous-gold pl-5 italic text-gray-700 my-8 py-2 bg-posthumous-gold/5 rounded-r-md;
 }
 
 .biography-content ul {
-  @apply list-disc pl-5 mb-4;
+  @apply list-disc pl-5 mb-5 space-y-2;
 }
 
 .biography-content ol {
-  @apply list-decimal pl-5 mb-4;
+  @apply list-decimal pl-5 mb-5 space-y-2;
 }
 
 .biography-content img {
-  @apply rounded-lg shadow-sm my-6;
+  @apply rounded-lg shadow-md my-8 mx-auto;
 }
 
 /* Carousel Styling */
 .carousel {
-  @apply relative overflow-hidden rounded-xl;
+  @apply relative overflow-hidden rounded-xl shadow-md;
 }
 
 .carousel-inner {
-  @apply flex transition-transform duration-500 ease-in-out;
+  @apply flex transition-transform duration-700 ease-in-out;
 }
 
 .carousel-item {
@@ -171,7 +188,7 @@
 }
 
 .carousel-control {
-  @apply absolute top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white/80 rounded-full flex items-center justify-center cursor-pointer hover:bg-white transition-all shadow-sm;
+  @apply absolute top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/90 rounded-full flex items-center justify-center cursor-pointer hover:bg-white transition-all duration-300 shadow-md z-10;
 }
 
 .carousel-control-prev {
@@ -183,19 +200,65 @@
 }
 
 /* Animation Classes */
-.fade-in {
-  animation: fadeIn 0.5s ease-out forwards;
-}
-
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.7s ease-out forwards;
+}
+
+.slide-in-right {
+  animation: slideInRight 0.7s ease-out forwards;
+}
+
+.scale-in {
+  animation: scaleIn 0.5s ease-out forwards;
+}
+
+.delay-1 {
+  animation-delay: 0.1s;
+}
+
+.delay-2 {
+  animation-delay: 0.2s;
+}
+
+.delay-3 {
+  animation-delay: 0.3s;
+}
+
+.delay-4 {
+  animation-delay: 0.4s;
 }
 
 .hover-scale {
@@ -208,5 +271,16 @@
 }
 
 .image-zoom img {
-  @apply transition-transform duration-500 hover:scale-110;
+  @apply transition-transform duration-700 hover:scale-110;
+}
+
+/* Card Hover Effects */
+.card-hover {
+  @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+}
+
+/* Background Styles */
+.bg-pattern-light {
+  background-color: #f8f9fa;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4af37' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }

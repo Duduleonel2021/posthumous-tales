@@ -12,26 +12,26 @@ const AlphabeticalSearchBar = ({ onLetterSelect, selectedLetter }: AlphabeticalS
   const alphabet = "#ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
   return (
-    <div className="mb-6 bg-white rounded-xl shadow-sm p-5 border border-gray-100">
-      <div className="flex items-center gap-2 mb-4">
-        <div className="bg-posthumous-gold/10 p-2 rounded-full">
+    <div className="mb-8 bg-white rounded-xl shadow-lg p-6 border border-gray-100 transition-all hover:shadow-xl">
+      <div className="flex items-center gap-3 mb-5">
+        <div className="bg-posthumous-gold/20 p-2.5 rounded-full">
           <ArrowDownAZ className="h-5 w-5 text-posthumous-gold" />
         </div>
-        <h3 className="text-xl font-playfair font-semibold text-posthumous-navy">Browse Alphabetically</h3>
+        <h3 className="text-2xl font-playfair font-semibold text-posthumous-navy border-b-2 border-posthumous-gold/30 pb-1">Browse Alphabetically</h3>
       </div>
-      <div className="flex flex-wrap gap-1.5 md:gap-2">
+      <div className="flex flex-wrap gap-2 md:gap-2.5">
         {alphabet.map(letter => (
           <Button
             key={letter}
             variant={selectedLetter === letter ? "default" : "outline"} 
-            className={`min-w-8 md:min-w-10 h-8 md:h-10 p-1 md:p-2 rounded-md transition-all duration-200 ${
+            className={`min-w-9 md:min-w-11 h-9 md:h-11 p-1 md:p-2 rounded-md transition-all duration-300 ${
               selectedLetter === letter 
-                ? "bg-posthumous-gold hover:bg-posthumous-gold/90 text-white shadow-md"
+                ? "bg-posthumous-gold hover:bg-posthumous-gold/90 text-white shadow-md scale-110"
                 : "border border-gray-200 hover:bg-posthumous-gold/10 hover:text-posthumous-gold hover:border-posthumous-gold/30"
             }`}
             onClick={() => onLetterSelect(selectedLetter === letter ? null : letter)}
           >
-            {letter}
+            <span className="font-medium">{letter}</span>
           </Button>
         ))}
       </div>
