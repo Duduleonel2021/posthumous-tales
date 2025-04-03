@@ -1,8 +1,9 @@
 
-import { Search, Palette, Users, Film, Music, Briefcase, BookOpen, Newspaper, Globe, GraduationCap, Beaker, Shield, Heart, Shirt, ArrowDownAZ, Plus } from "lucide-react"
+import { Search, Palette, Users, Film, Music, Briefcase, BookOpen, Newspaper, Globe, GraduationCap, Beaker, Shield, Heart, Shirt, ArrowDownAZ, Plus, Menu } from "lucide-react"
 import { Link } from "react-router-dom"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
+import { useState } from "react"
 
 const categoryIcons = {
   "arts": <Palette className="w-4 h-4 mr-1" />,
@@ -21,40 +22,50 @@ const categoryIcons = {
 }
 
 const Header = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
-    <header className="w-full border-b bg-white shadow-sm">
+    <header className="w-full sticky top-0 z-50 border-b bg-white shadow-sm">
       <div className="container px-4 py-3 mx-auto">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center gap-2">
-              <h1 className="text-2xl font-bold text-posthumous-navy">
-                Posthumous <span className="text-posthumous-gold">Biographies</span>
+              <h1 className="text-2xl font-playfair font-bold">
+                <span className="text-posthumous-navy">Posthumous</span> <span className="text-posthumous-gold">Biographies</span>
               </h1>
             </Link>
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="md:hidden" 
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              <Menu className="h-6 w-6" />
+            </Button>
           </div>
-          <div className="flex items-center gap-2">
+          <div className={`${mobileMenuOpen ? 'block' : 'hidden'} md:flex md:items-center gap-2 w-full md:w-auto`}>
             <div className="relative flex-1">
               <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input
                 type="search"
                 placeholder="Search biographies..."
-                className="pl-8 border-posthumous-navy/20 focus:border-posthumous-gold focus:ring-posthumous-gold/20"
+                className="pl-8 border-posthumous-navy/10 focus:border-posthumous-gold focus:ring-posthumous-gold/20 bg-gray-50 rounded-md"
               />
             </div>
-            <Button variant="outline" className="border-posthumous-navy/20 hover:bg-posthumous-gold hover:text-white">Search</Button>
-            <Link to="/biographies">
-              <Button variant="outline" className="border-posthumous-navy/20 hover:bg-posthumous-gold hover:text-white">
+            <Button variant="outline" className="border-posthumous-navy/10 hover:bg-posthumous-gold hover:text-white transition-colors">Search</Button>
+            <Link to="/biographies" className="hidden sm:block">
+              <Button variant="outline" className="border-posthumous-navy/10 hover:bg-posthumous-gold hover:text-white transition-colors">
                 <ArrowDownAZ className="h-4 w-4 mr-1" /> A-Z
               </Button>
             </Link>
-            <Link to="/post-biography">
-              <Button className="bg-posthumous-navy hover:bg-posthumous-gold">
+            <Link to="/post-biography" className="hidden sm:block">
+              <Button className="bg-posthumous-navy hover:bg-posthumous-gold transition-colors">
                 <Plus className="h-4 w-4 mr-1" /> Post Biography
               </Button>
             </Link>
           </div>
         </div>
-        <nav className="flex items-center mt-2 space-x-1 overflow-x-auto pb-2 md:pb-0">
+        <nav className={`${mobileMenuOpen ? 'flex' : 'hidden'} md:flex items-center mt-2 space-x-1 overflow-x-auto pb-2 md:pb-0 flex-wrap`}>
           <Link to="/category/arts" className="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-posthumous-gold/10 hover:text-posthumous-navy transition-colors">
             {categoryIcons["arts"]} Arts
           </Link>

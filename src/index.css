@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -92,25 +92,78 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground font-inter;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-playfair;
   }
+  
+  /* Improved typography for better readability */
+  p {
+    @apply text-base leading-relaxed;
+  }
+  
+  /* Custom link styling */
+  a.story-link {
+    @apply relative inline-block after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-posthumous-gold after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left;
+  }
 }
 
+/* Biography Content Styling */
 .biography-content {
-  @apply prose prose-lg max-w-none prose-headings:font-playfair prose-headings:text-posthumous-navy prose-p:text-posthumous-text;
+  @apply prose prose-lg max-w-none prose-headings:font-playfair prose-headings:text-posthumous-navy prose-p:text-posthumous-text prose-p:leading-relaxed;
 }
 
+.biography-content h1 {
+  @apply text-3xl md:text-4xl font-bold mb-6 leading-tight;
+}
+
+.biography-content h2 {
+  @apply text-2xl md:text-3xl font-bold mt-8 mb-4 leading-tight;
+}
+
+.biography-content h3 {
+  @apply text-xl md:text-2xl font-semibold mt-6 mb-3;
+}
+
+.biography-content p {
+  @apply mb-4;
+}
+
+.biography-content a {
+  @apply text-posthumous-gold hover:text-posthumous-navy transition-colors;
+}
+
+.biography-content blockquote {
+  @apply border-l-4 border-posthumous-gold pl-4 italic text-gray-700 my-6;
+}
+
+.biography-content ul {
+  @apply list-disc pl-5 mb-4;
+}
+
+.biography-content ol {
+  @apply list-decimal pl-5 mb-4;
+}
+
+.biography-content img {
+  @apply rounded-lg shadow-sm my-6;
+}
+
+/* Carousel Styling */
 .carousel {
-  @apply relative overflow-hidden;
+  @apply relative overflow-hidden rounded-xl;
 }
 
 .carousel-inner {
-  @apply flex transition-transform duration-300 ease-in-out;
+  @apply flex transition-transform duration-500 ease-in-out;
 }
 
 .carousel-item {
@@ -118,13 +171,42 @@
 }
 
 .carousel-control {
-  @apply absolute top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white/80 rounded-full flex items-center justify-center cursor-pointer hover:bg-white;
+  @apply absolute top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white/80 rounded-full flex items-center justify-center cursor-pointer hover:bg-white transition-all shadow-sm;
 }
 
 .carousel-control-prev {
-  @apply left-2;
+  @apply left-4;
 }
 
 .carousel-control-next {
-  @apply right-2;
+  @apply right-4;
+}
+
+/* Animation Classes */
+.fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hover-scale {
+  @apply transition-transform duration-300 hover:scale-105;
+}
+
+/* Image Hover Effects */
+.image-zoom {
+  @apply overflow-hidden;
+}
+
+.image-zoom img {
+  @apply transition-transform duration-500 hover:scale-110;
 }

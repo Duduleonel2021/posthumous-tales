@@ -30,19 +30,19 @@ const CategorySection = ({ title, categorySlug, biographies }: CategorySectionPr
   const icon = categoryIcons[categorySlug] || categoryIcons["others"];
   
   return (
-    <div className="mb-12">
-      <div className="flex justify-between items-center mb-6 border-b border-posthumous-gold/20 pb-2">
+    <div className="mb-16">
+      <div className="flex justify-between items-center mb-6">
         <div className="flex items-center">
-          <div className="bg-posthumous-navy/5 p-2 rounded-full mr-3">
-            {icon}
+          <div className="bg-posthumous-gold/10 p-2.5 rounded-full mr-3">
+            {React.cloneElement(icon as React.ReactElement, { className: "w-5 h-5 text-posthumous-gold" })}
           </div>
-          <h2 className="text-2xl font-bold text-posthumous-navy">{title}</h2>
+          <h2 className="text-2xl font-playfair font-bold text-posthumous-navy border-b-2 border-posthumous-gold/30 pb-1">{title}</h2>
         </div>
         <Link 
           to={`/category/${categorySlug}`}
-          className="flex items-center text-posthumous-navy hover:text-posthumous-gold transition-colors"
+          className="flex items-center text-posthumous-navy hover:text-posthumous-gold transition-colors group"
         >
-          View All <ChevronRight className="h-4 w-4 ml-1" />
+          <span className="font-medium">View All</span> <ChevronRight className="h-4 w-4 ml-1 transition-transform group-hover:translate-x-1" />
         </Link>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
