@@ -1,4 +1,5 @@
 
+import React from "react";
 import BiographyCard, { BiographyCardProps } from "./BiographyCard";
 import { Link } from "react-router-dom";
 import { ChevronRight, Palette, Users, Film, Music, Briefcase, BookOpen, Newspaper, Globe, GraduationCap, Beaker, Shield, Heart, Shirt } from "lucide-react";
