@@ -1,21 +1,25 @@
 
+import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FeaturedBiographies from "@/components/FeaturedBiographies";
 import CategorySection from "@/components/CategorySection";
 import TodayDeaths from "@/components/TodayDeaths";
 import { featuredBiographies, categoryBiographies } from "@/data/mockData";
-import { BookOpen, UserPlus, Search } from "lucide-react";
+import { BookOpen, UserPlus, Search, TrendingUp, Calendar, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
 const Index = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+    <div className="min-h-screen flex flex-col bg-white">
       <Header />
       
       <main className="flex-grow">
-        <div className="bg-white py-8">
+        {/* Hero Section */}
+        <div className="bg-white py-6">
           <div className="container mx-auto px-4">
             <FeaturedBiographies biographies={featuredBiographies} />
           </div>
@@ -23,7 +27,7 @@ const Index = () => {
         
         <div className="container mx-auto px-4 py-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="md:col-span-2">              
+            <div className="md:col-span-2 space-y-16">              
               <CategorySection 
                 title="Arts & Culture" 
                 categorySlug="arts" 
@@ -50,49 +54,68 @@ const Index = () => {
             </div>
             
             <div className="space-y-8">
-              <div className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
+              {/* Search Module */}
+              <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
                 <div className="p-6">
                   <div className="flex items-center mb-4">
-                    <div className="bg-posthumous-gold/10 p-2 rounded-full mr-3">
-                      <Search className="h-5 w-5 text-posthumous-gold" />
+                    <div className="bg-posthumous-navy/10 p-2.5 rounded-full mr-3">
+                      <Search className="h-5 w-5 text-posthumous-navy" />
                     </div>
                     <h3 className="font-playfair text-xl font-bold text-posthumous-navy">
                       Find Biographies
                     </h3>
                   </div>
+                  <div className="mb-4">
+                    <div className="relative">
+                      <input
+                        type="text"
+                        placeholder="Search biographies..."
+                        className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-posthumous-gold/30"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                      />
+                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    </div>
+                  </div>
                   <div className="space-y-3">
+                    <h4 className="text-sm font-medium text-gray-500">Browse by</h4>
                     <Link 
                       to="/biographies" 
-                      className="block w-full py-2.5 px-4 text-left bg-gray-50 hover:bg-posthumous-gold/10 border border-gray-200 rounded-md text-posthumous-navy transition-colors"
+                      className="flex items-center w-full py-2.5 px-4 text-left bg-gray-50 hover:bg-posthumous-navy/5 border border-gray-200 rounded-md text-posthumous-navy transition-colors"
                     >
-                      Browse Alphabetically
+                      <Users className="h-4 w-4 mr-2 text-posthumous-navy" />
+                      Alphabetical Index
                     </Link>
                     <Link 
                       to="/category/politics" 
-                      className="block w-full py-2.5 px-4 text-left bg-gray-50 hover:bg-posthumous-gold/10 border border-gray-200 rounded-md text-posthumous-navy transition-colors"
+                      className="flex items-center w-full py-2.5 px-4 text-left bg-gray-50 hover:bg-posthumous-navy/5 border border-gray-200 rounded-md text-posthumous-navy transition-colors"
                     >
-                      Browse by Category
+                      <TrendingUp className="h-4 w-4 mr-2 text-posthumous-navy" />
+                      Popular Categories
                     </Link>
                     <Link 
                       to="/deaths-on-this-day" 
-                      className="block w-full py-2.5 px-4 text-left bg-gray-50 hover:bg-posthumous-gold/10 border border-gray-200 rounded-md text-posthumous-navy transition-colors"
+                      className="flex items-center w-full py-2.5 px-4 text-left bg-gray-50 hover:bg-posthumous-navy/5 border border-gray-200 rounded-md text-posthumous-navy transition-colors"
                     >
+                      <Calendar className="h-4 w-4 mr-2 text-posthumous-navy" />
                       Deaths on This Day
                     </Link>
                   </div>
                 </div>
               </div>
               
-              <div className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
+              {/* Today Deaths Module */}
+              <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
                 <div className="p-6">
                   <TodayDeaths />
                 </div>
               </div>
               
-              <div className="bg-posthumous-navy text-white rounded-xl shadow-md overflow-hidden">
+              {/* About Module */}
+              <div className="bg-posthumous-navy text-white rounded-xl shadow-lg overflow-hidden">
                 <div className="p-6">
                   <div className="flex items-center mb-4">
-                    <div className="bg-posthumous-gold/30 p-2 rounded-full mr-3">
+                    <div className="bg-white/10 p-2.5 rounded-full mr-3">
                       <BookOpen className="h-5 w-5 text-posthumous-gold" />
                     </div>
                     <h3 className="font-playfair text-xl font-bold">
@@ -108,10 +131,11 @@ const Index = () => {
                 </div>
               </div>
               
-              <div className="bg-gradient-to-br from-posthumous-lightgold to-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
+              {/* Contribute Module */}
+              <div className="bg-gradient-to-br from-posthumous-lightgold to-white rounded-xl shadow-md overflow-hidden border border-gray-100">
                 <div className="p-6">
                   <div className="flex items-center mb-4">
-                    <div className="bg-posthumous-gold/30 p-2 rounded-full mr-3">
+                    <div className="bg-posthumous-navy/10 p-2.5 rounded-full mr-3">
                       <UserPlus className="h-5 w-5 text-posthumous-navy" />
                     </div>
                     <h3 className="font-playfair text-xl font-bold text-posthumous-navy">
@@ -123,7 +147,7 @@ const Index = () => {
                   </p>
                   <Button 
                     asChild
-                    className="bg-posthumous-gold text-white hover:bg-posthumous-navy transition-colors w-full"
+                    className="bg-posthumous-navy text-white hover:bg-posthumous-gold transition-colors w-full"
                   >
                     <Link to="/post-biography">
                       Submit a Biography
