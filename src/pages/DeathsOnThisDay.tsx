@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { format } from "date-fns";
-import { pt } from "date-fns/locale";
+import { pt } from "date-fns/locale/pt";
 import BiographyCard from "@/components/BiographyCard";
 
 // Mock data for deaths on this day
