@@ -10,6 +10,7 @@ import BiographyEdit from "./pages/BiographyEdit";
 import BiographyPost from "./pages/BiographyPost";
 import CategoryPage from "./pages/CategoryPage";
 import AlphabeticalBiographies from "./pages/AlphabeticalBiographies";
+import DeathsOnThisDay from "./pages/DeathsOnThisDay";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,7 +28,7 @@ const App = () => (
           <Route path="/post-biography" element={<BiographyPost />} />
           <Route path="/category/:slug" element={<CategoryPage />} />
           <Route path="/biographies" element={<AlphabeticalBiographies />} />
-          <Route path="/deaths-on-this-day" element={<BiographyDetail />} />
+          <Route path="/deaths-on-this-day" element={<DeathsOnThisDay />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
