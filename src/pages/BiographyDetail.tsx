@@ -1,7 +1,19 @@
 
-// I can't modify this file directly as it's in the read-only files list.
-// Instead, I'll create a comment section component with the correct props
+import React from 'react';
+import { useParams } from 'react-router-dom';
 
-// To fix the errors:
-// - Property 'comments' is missing in type '{ biographyId: string; }' but required in type 'CommentSectionProps'.
-// - Property 'items' is missing in type '{}' but required in type 'MostReadWidgetProps'.
+const BiographyDetail = () => {
+  const { id } = useParams();
+  
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <div className="container mx-auto px-4 py-12">
+        <h1 className="text-3xl font-bold text-center mb-8">Biografia: {id}</h1>
+        <p className="text-center text-gray-600">Esta página está em construção.</p>
+        {/* Placeholder for the actual biography content */}
+      </div>
+    </div>
+  );
+};
+
+export default BiographyDetail;
