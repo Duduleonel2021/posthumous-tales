@@ -14,7 +14,7 @@ const TodayDeaths = () => {
   const month = today.getMonth() + 1;
   const day = today.getDate();
   
-  const formattedDate = new Intl.DateTimeFormat('en-US', {
+  const formattedDate = new Intl.DateTimeFormat('pt-BR', {
     month: 'long',
     day: 'numeric'
   }).format(today);
@@ -53,7 +53,7 @@ const TodayDeaths = () => {
       <CardHeader className="pb-3 border-b border-posthumous-gold/10">
         <CardTitle className="flex items-center text-xl font-bold text-posthumous-navy">
           <CalendarDays className="h-5 w-5 mr-2 text-posthumous-gold" />
-          Deaths on {formattedDate}
+          Mortes neste dia {formattedDate}
         </CardTitle>
       </CardHeader>
       <CardContent className="pt-4">
@@ -68,7 +68,7 @@ const TodayDeaths = () => {
             {deathsToday.map((person) => (
               <li key={person.id} className="pt-3 group">
                 <Link 
-                  to={`/biography/${person.id}`}
+                  to={`/biografia/${person.id}`}
                   className="flex items-center hover:bg-posthumous-lightgold/30 p-2 rounded-md transition-colors"
                 >
                   <Skull className="h-4 w-4 mr-3 text-posthumous-gold/70" />
@@ -89,7 +89,7 @@ const TodayDeaths = () => {
           <div className="text-center py-6">
             <Skull className="h-8 w-8 mx-auto mb-2 text-posthumous-gold/50" />
             <p className="text-posthumous-text/80 italic text-sm">
-              No notable deaths recorded for this day in history.
+              Nenhuma morte notável registrada para este dia na história.
             </p>
           </div>
         )}
@@ -97,10 +97,10 @@ const TodayDeaths = () => {
         {deathsToday.length > 0 && (
           <div className="mt-4 pt-3 border-t border-posthumous-gold/10 text-center">
             <Link 
-              to="/deaths-on-this-day"
+              to="/mortes-neste-dia"
               className="inline-flex items-center text-sm text-posthumous-gold hover:text-posthumous-navy transition-colors"
             >
-              View more historical deaths
+              Ver mais mortes históricas
               <ArrowRight className="h-3.5 w-3.5 ml-1" />
             </Link>
           </div>

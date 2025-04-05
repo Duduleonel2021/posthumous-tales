@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { format } from "date-fns";
-import { ptBR } from "date-fns/locale";
+import { pt } from "date-fns/locale";
 import BiographyCard from "@/components/BiographyCard";
 
 // Mock data for deaths on this day
@@ -118,7 +118,7 @@ const DeathsOnThisDay = () => {
             <h1 className="text-3xl md:text-5xl font-bold font-playfair">Mortes Neste Dia</h1>
           </div>
           <p className="text-lg md:text-xl text-gray-300 max-w-3xl">
-            Lembrando indivíduos notáveis que faleceram em {format(today, "d 'de' MMMM", {locale: ptBR})} ao longo da história.
+            Lembrando indivíduos notáveis que faleceram em {format(today, "d 'de' MMMM", {locale: pt})} ao longo da história.
             Seus legados continuam a inspirar e influenciar nosso mundo.
           </p>
         </div>
