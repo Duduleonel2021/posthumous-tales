@@ -6,19 +6,35 @@ import { Button } from "./ui/button"
 import { Input } from "./ui/input"
 
 const categoryIcons = {
-  "arts": <Palette className="w-4 h-4 mr-1" />,
-  "politics": <Users className="w-4 h-4 mr-1" />,
+  "artes": <Palette className="w-4 h-4 mr-1" />,
+  "politica": <Users className="w-4 h-4 mr-1" />,
   "cinema-tv": <Film className="w-4 h-4 mr-1" />,
-  "music": <Music className="w-4 h-4 mr-1" />,
-  "business": <Briefcase className="w-4 h-4 mr-1" />,
-  "literature": <BookOpen className="w-4 h-4 mr-1" />,
-  "journalism": <Newspaper className="w-4 h-4 mr-1" />,
+  "musica": <Music className="w-4 h-4 mr-1" />,
+  "negocios": <Briefcase className="w-4 h-4 mr-1" />,
+  "literatura": <BookOpen className="w-4 h-4 mr-1" />,
+  "jornalismo": <Newspaper className="w-4 h-4 mr-1" />,
   "internet": <Globe className="w-4 h-4 mr-1" />,
-  "education": <GraduationCap className="w-4 h-4 mr-1" />,
-  "science": <Beaker className="w-4 h-4 mr-1" />,
+  "educacao": <GraduationCap className="w-4 h-4 mr-1" />,
+  "ciencia": <Beaker className="w-4 h-4 mr-1" />,
   "crime": <Shield className="w-4 h-4 mr-1" />,
-  "health": <Heart className="w-4 h-4 mr-1" />,
-  "fashion": <Shirt className="w-4 h-4 mr-1" />
+  "saude": <Heart className="w-4 h-4 mr-1" />,
+  "moda": <Shirt className="w-4 h-4 mr-1" />
+}
+
+const categoryNames = {
+  "artes": "Artes",
+  "politica": "Política",
+  "cinema-tv": "Cinema e TV",
+  "musica": "Música",
+  "negocios": "Negócios",
+  "literatura": "Literatura",
+  "jornalismo": "Jornalismo",
+  "internet": "Internet",
+  "educacao": "Educação",
+  "ciencia": "Ciência",
+  "crime": "Crime",
+  "saude": "Saúde",
+  "moda": "Moda"
 }
 
 const Header = () => {
@@ -31,7 +47,7 @@ const Header = () => {
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
             <h1 className="text-2xl font-playfair font-bold">
-              <span className="text-posthumous-navy">Posthumous</span> <span className="text-posthumous-gold">Biographies</span>
+              <span className="text-posthumous-navy">Biografias</span> <span className="text-posthumous-gold">Póstumas</span>
             </h1>
           </Link>
           
@@ -46,14 +62,14 @@ const Header = () => {
                 >
                   <Search className="h-5 w-5" />
                 </Button>
-                <Link to="/biographies">
+                <Link to="/biografias">
                   <Button variant="ghost" className="text-gray-600 hover:text-posthumous-navy hover:bg-transparent">
-                    <ArrowDownAZ className="h-5 w-5 mr-1" /> A-Z Index
+                    <ArrowDownAZ className="h-5 w-5 mr-1" /> Índice A-Z
                   </Button>
                 </Link>
-                <Link to="/post-biography">
+                <Link to="/postar-biografia">
                   <Button className="bg-posthumous-navy hover:bg-posthumous-gold transition-colors">
-                    <Plus className="h-4 w-4 mr-1" /> Post Biography
+                    <Plus className="h-4 w-4 mr-1" /> Postar Biografia
                   </Button>
                 </Link>
               </>
@@ -63,7 +79,7 @@ const Header = () => {
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                   <Input
                     type="search"
-                    placeholder="Search biographies..."
+                    placeholder="Pesquisar biografias..."
                     className="pl-10 pr-4 border-posthumous-navy/10 focus:border-posthumous-gold focus:ring-posthumous-gold/20"
                     autoFocus
                   />
@@ -91,36 +107,36 @@ const Header = () => {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
               <input
                 type="search"
-                placeholder="Search biographies..."
+                placeholder="Pesquisar biografias..."
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-posthumous-gold"
               />
             </div>
             
             <div className="flex flex-col space-y-2">
               <Link 
-                to="/biographies"
+                to="/biografias"
                 className="flex items-center px-3 py-2 text-posthumous-navy font-medium hover:bg-posthumous-gold/10 rounded-md"
               >
-                <ArrowDownAZ className="h-5 w-5 mr-2" /> Alphabetical Index
+                <ArrowDownAZ className="h-5 w-5 mr-2" /> Índice Alfabético
               </Link>
               <Link 
-                to="/post-biography"
+                to="/postar-biografia"
                 className="flex items-center px-3 py-2 text-posthumous-navy font-medium hover:bg-posthumous-gold/10 rounded-md"
               >
-                <Plus className="h-5 w-5 mr-2" /> Post Biography
+                <Plus className="h-5 w-5 mr-2" /> Postar Biografia
               </Link>
             </div>
             
             <div className="mt-4">
-              <h3 className="px-3 font-medium text-sm text-gray-500 mb-2">Categories</h3>
+              <h3 className="px-3 font-medium text-sm text-gray-500 mb-2">Categorias</h3>
               <div className="grid grid-cols-2 gap-1">
                 {Object.entries(categoryIcons).map(([category, icon]) => (
                   <Link 
                     key={category}
-                    to={`/category/${category}`}
+                    to={`/categoria/${category}`}
                     className="flex items-center px-3 py-2 text-posthumous-navy hover:bg-posthumous-gold/10 rounded-md"
                   >
-                    {icon} {category.charAt(0).toUpperCase() + category.slice(1)}
+                    {icon} {categoryNames[category as keyof typeof categoryNames]}
                   </Link>
                 ))}
               </div>
@@ -135,10 +151,10 @@ const Header = () => {
             {Object.entries(categoryIcons).map(([category, icon]) => (
               <Link 
                 key={category}
-                to={`/category/${category}`}
+                to={`/categoria/${category}`}
                 className="flex items-center px-3 py-2 text-sm font-medium whitespace-nowrap hover:bg-white/10 rounded-md mx-1"
               >
-                {icon} {category.charAt(0).toUpperCase() + category.slice(1)}
+                {icon} {categoryNames[category as keyof typeof categoryNames]}
               </Link>
             ))}
           </div>

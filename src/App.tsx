@@ -23,12 +23,22 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/biografia/:id" element={<BiographyDetail />} />
+          <Route path="/biografia/:id/editar" element={<BiographyEdit />} />
+          <Route path="/postar-biografia" element={<BiographyPost />} />
+          <Route path="/categoria/:slug" element={<CategoryPage />} />
+          <Route path="/biografias" element={<AlphabeticalBiographies />} />
+          <Route path="/mortes-neste-dia" element={<DeathsOnThisDay />} />
+          <Route path="/autor/:id" element={<BiographyDetail />} /> {/* Placeholder for author pages */}
+          
+          {/* Legacy routes for backward compatibility */}
           <Route path="/biography/:id" element={<BiographyDetail />} />
           <Route path="/biography/:id/edit" element={<BiographyEdit />} />
           <Route path="/post-biography" element={<BiographyPost />} />
           <Route path="/category/:slug" element={<CategoryPage />} />
           <Route path="/biographies" element={<AlphabeticalBiographies />} />
           <Route path="/deaths-on-this-day" element={<DeathsOnThisDay />} />
+          
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

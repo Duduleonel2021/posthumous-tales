@@ -1,13 +1,18 @@
 
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Edit } from "lucide-react";
+import { ArrowLeft, Edit, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ImageCarousel from "@/components/ImageCarousel";
 import BiographySidebar from "@/components/BiographySidebar";
-import RelatedBiographiesHub from "@/components/RelatedBiographiesHub";
+import SocialShareButtons from "@/components/SocialShareButtons";
+import AuthorInfo from "@/components/AuthorInfo";
+import CommentSection from "@/components/CommentSection";
+import MostReadWidget from "@/components/MostReadWidget";
+import QuoteBlock from "@/components/QuoteBlock";
+import ArticleNavigation from "@/components/ArticleNavigation";
 import { sampleBiography } from "@/data/mockData";
 
 // Mock related biographies data (in a real app, this would come from an API)
@@ -19,8 +24,8 @@ const getRelatedBiographies = (category: string) => {
       image: "https://upload.wikimedia.org/wikipedia/commons/b/bc/Sir_Winston_Churchill_-_19086236948.jpg",
       birthYear: 1874,
       deathYear: 1965,
-      category: "Politics",
-      summary: "British statesman, soldier, and writer who served as Prime Minister of the United Kingdom."
+      category: "Política",
+      summary: "Estadista britânico, soldado e escritor que serviu como Primeiro-Ministro do Reino Unido."
     },
     {
       id: "franklin-roosevelt",
@@ -28,8 +33,8 @@ const getRelatedBiographies = (category: string) => {
       image: "https://upload.wikimedia.org/wikipedia/commons/4/42/FDR_1944_Color_Portrait.jpg",
       birthYear: 1882,
       deathYear: 1945,
-      category: "Politics",
-      summary: "American politician who served as the 32nd president of the United States."
+      category: "Política",
+      summary: "Político americano que serviu como o 32º presidente dos Estados Unidos."
     },
     {
       id: "margaret-thatcher",
@@ -37,8 +42,8 @@ const getRelatedBiographies = (category: string) => {
       image: "https://upload.wikimedia.org/wikipedia/commons/2/20/Margaret_Thatcher_%281983%29.jpg",
       birthYear: 1925,
       deathYear: 2013,
-      category: "Politics",
-      summary: "British stateswoman who served as Prime Minister of the United Kingdom from 1979 to 1990."
+      category: "Política",
+      summary: "Estadista britânica que serviu como Primeira-Ministra do Reino Unido de 1979 a 1990."
     },
     {
       id: "nelson-mandela",
@@ -46,27 +51,76 @@ const getRelatedBiographies = (category: string) => {
       image: "https://upload.wikimedia.org/wikipedia/commons/0/02/Nelson_Mandela_1994.jpg",
       birthYear: 1918,
       deathYear: 2013,
-      category: "Politics",
-      summary: "South African anti-apartheid revolutionary, political leader, and philanthropist who served as President of South Africa."
+      category: "Política",
+      summary: "Revolucionário anti-apartheid sul-africano, líder político e filantropo que serviu como Presidente da África do Sul."
     }
   ];
 };
+
+// Enhanced sample biography content with sections
+const enhancedContent = `
+<h2 id="primeiros-anos">Primeiros Anos</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl.</p>
+<p>Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl.</p>
+
+<h2 id="carreira">Carreira</h2>
+<p>Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl.</p>
+
+<h3 id="principais-conquistas">Principais Conquistas</h3>
+<p>Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl.</p>
+
+<div class="quote-placeholder"></div>
+
+<h3 id="reconhecimento-internacional">Reconhecimento Internacional</h3>
+<p>Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl.</p>
+
+<h2 id="legado">Legado</h2>
+<p>Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl.</p>
+<p>Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl.</p>
+`;
 
 const BiographyDetail = () => {
   const { id } = useParams<{ id: string }>();
   const [biography, setBiography] = useState<any>(null);
   const [relatedBiographies, setRelatedBiographies] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const currentUrl = window.location.href;
 
   useEffect(() => {
     // In a real app, this would fetch from an API based on the ID
-    // For now, we're using mock data
+    // For now, we're using mock data with enhanced content
     setTimeout(() => {
-      setBiography(sampleBiography);
+      const modifiedBiography = {
+        ...sampleBiography,
+        content: enhancedContent,
+        author: {
+          id: "john-doe",
+          name: "João Silva",
+          bio: "Historiador e escritor especializado em biografias históricas"
+        },
+        publishDate: "15 de março de 2025"
+      };
+      
+      setBiography(modifiedBiography);
       setRelatedBiographies(getRelatedBiographies(sampleBiography.category));
       setLoading(false);
     }, 300);
   }, [id]);
+
+  useEffect(() => {
+    // Add quote to placeholder after content is loaded
+    if (biography) {
+      const quoteElement = document.querySelector('.quote-placeholder');
+      if (quoteElement) {
+        const quoteDiv = document.createElement('div');
+        quoteDiv.id = 'biography-quote';
+        quoteElement.appendChild(quoteDiv);
+        
+        // Using ReactDOM to render the component would be better in a real app
+        // This is a simplified approach for demonstration
+      }
+    }
+  }, [biography]);
 
   if (loading) {
     return (
@@ -88,9 +142,9 @@ const BiographyDetail = () => {
         <Header />
         <main className="flex-grow container mx-auto px-4 py-8">
           <div className="text-center">
-            <h2 className="text-2xl font-bold mb-4">Biography not found</h2>
+            <h2 className="text-2xl font-bold mb-4">Biografia não encontrada</h2>
             <Link to="/" className="text-blue-600 hover:underline">
-              Return to home page
+              Voltar para a página inicial
             </Link>
           </div>
         </main>
@@ -107,19 +161,20 @@ const BiographyDetail = () => {
         <div className="mb-6 flex justify-between items-center">
           <Button variant="outline" asChild>
             <Link to="/" className="flex items-center gap-2">
-              <ArrowLeft className="h-4 w-4" /> Back to Home
+              <ArrowLeft className="h-4 w-4" /> Voltar
             </Link>
           </Button>
           
           <Button asChild>
             <Link to={`/biography/${id}/edit`} className="flex items-center gap-2">
-              <Edit className="h-4 w-4" /> Edit Biography
+              <Edit className="h-4 w-4" /> Editar Biografia
             </Link>
           </Button>
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 space-y-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          {/* Main Content - 8 columns on large screens */}
+          <div className="lg:col-span-8 space-y-8">
             <div>
               <img 
                 src={biography.mainImage} 
@@ -140,42 +195,64 @@ const BiographyDetail = () => {
                     {tag}
                   </span>
                 ))}
+                
+                <span className="flex items-center gap-1 bg-gray-100 text-gray-700 px-3 py-1 rounded-md text-sm ml-auto">
+                  <Calendar className="h-3 w-3" />
+                  {biography.birthYear} - {biography.deathYear}
+                </span>
               </div>
               
-              <h1 className="text-3xl md:text-5xl font-bold mb-2 text-posthumous-navy">
+              <h1 className="text-3xl md:text-5xl font-bold mb-4 text-posthumous-navy font-playfair">
                 {biography.name}
               </h1>
               
-              <p className="text-xl text-gray-600 mb-6">
+              <p className="text-xl text-gray-600 mb-4 font-playfair">
                 {biography.summary}
               </p>
 
-              <div className="flex items-center mb-6">
-                <Link 
-                  to={`/hub/${biography.category.toLowerCase().replace(/\s+/g, '-')}`}
-                  className="text-posthumous-gold hover:text-posthumous-darkgold transition-colors border-b border-posthumous-gold/30 pb-1"
-                >
-                  View all {biography.category} biographies in the hub →
-                </Link>
-              </div>
+              {/* Author info */}
+              <AuthorInfo 
+                name={biography.author.name} 
+                id={biography.author.id}
+                bio={biography.author.bio}
+                publishDate={biography.publishDate}
+              />
               
-              <div className="biography-content" dangerouslySetInnerHTML={{ __html: biography.content }}></div>
+              {/* Social Share Buttons */}
+              <SocialShareButtons 
+                title={biography.name} 
+                url={currentUrl}
+              />
+              
+              {/* Content with sections */}
+              <div 
+                className="biography-content prose prose-lg max-w-none mt-8" 
+                dangerouslySetInnerHTML={{ __html: biography.content }}
+              />
+              
+              {/* Render Quote Block - normally this would be part of the content */}
+              <div id="biography-quote">
+                <QuoteBlock 
+                  text="A verdadeira medida de um homem não é como ele se comporta em momentos de conforto e conveniência, mas como ele se mantém em tempos de controvérsia e desafio."
+                  author={biography.name}
+                />
+              </div>
             </div>
             
             {biography.images && biography.images.length > 0 && (
               <div>
-                <h2 className="text-2xl font-bold mb-4 text-posthumous-navy">Images</h2>
+                <h2 className="text-2xl font-bold mb-4 text-posthumous-navy font-playfair">Imagens</h2>
                 <ImageCarousel images={biography.images} />
               </div>
             )}
             
             {biography.video && (
               <div>
-                <h2 className="text-2xl font-bold mb-4 text-posthumous-navy">Video</h2>
+                <h2 className="text-2xl font-bold mb-4 text-posthumous-navy font-playfair">Vídeo</h2>
                 <div className="aspect-w-16 aspect-h-9">
                   <iframe
                     src={biography.video}
-                    title={`Video about ${biography.name}`}
+                    title={`Vídeo sobre ${biography.name}`}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                     className="w-full h-96 rounded-lg"
@@ -183,9 +260,17 @@ const BiographyDetail = () => {
                 </div>
               </div>
             )}
+            
+            {/* Comment Section */}
+            <CommentSection biographyId={id || ""} />
           </div>
           
-          <div>
+          {/* Sidebar - 4 columns on large screens */}
+          <div className="lg:col-span-4 space-y-8">
+            {/* Article Navigation */}
+            <ArticleNavigation />
+            
+            {/* Biography Sidebar */}
             <BiographySidebar
               fullName={biography.fullName}
               birthDate={biography.birthDate}
@@ -196,15 +281,48 @@ const BiographyDetail = () => {
               website={biography.website}
               socialLinks={biography.socialLinks}
             />
+            
+            {/* Most Read Widget */}
+            <MostReadWidget />
           </div>
         </div>
 
-        {/* Add the Related Biographies Hub component */}
-        <div className="mt-12">
-          <RelatedBiographiesHub 
-            categoryName={biography.category}
-            relatedBiographies={relatedBiographies}
-          />
+        {/* You May Also Like Section */}
+        <div className="mt-12 bg-white rounded-xl shadow-lg p-6 border border-gray-100">
+          <h2 className="text-2xl font-bold mb-6 text-posthumous-navy font-playfair border-b pb-4">
+            Você também pode gostar
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {relatedBiographies.map((bio) => (
+              <Link 
+                key={bio.id}
+                to={`/biography/${bio.id}`}
+                className="group"
+              >
+                <div className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
+                  <div className="h-48 overflow-hidden">
+                    <img 
+                      src={bio.image} 
+                      alt={bio.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <span className="text-xs font-medium text-posthumous-gold">
+                      {bio.category}
+                    </span>
+                    <h3 className="font-bold text-posthumous-navy mt-1 group-hover:text-posthumous-gold transition-colors">
+                      {bio.name}
+                    </h3>
+                    <p className="text-sm text-gray-600 line-clamp-2 mt-1">
+                      {bio.summary}
+                    </p>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </main>
       

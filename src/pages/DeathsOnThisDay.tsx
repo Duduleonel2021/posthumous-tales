@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
 import BiographyCard from "@/components/BiographyCard";
 
 // Mock data for deaths on this day
@@ -19,8 +20,8 @@ const mockDeathsToday = [
     deathYear: 1955,
     deathMonth: 4,
     deathDay: 18,
-    category: "Science",
-    summary: "German-born theoretical physicist, widely acknowledged to be one of the greatest and most influential physicists of all time."
+    category: "Ciência",
+    summary: "Físico teórico nascido na Alemanha, amplamente reconhecido como um dos maiores e mais influentes físicos de todos os tempos."
   },
   {
     id: "leonardo-da-vinci",
@@ -30,8 +31,8 @@ const mockDeathsToday = [
     deathYear: 1519,
     deathMonth: 5,
     deathDay: 2,
-    category: "Art",
-    summary: "Italian polymath of the High Renaissance who was active as a painter, draughtsman, engineer, scientist, theorist, sculptor, and architect."
+    category: "Arte",
+    summary: "Polímata italiano do Renascimento que atuou como pintor, desenhista, engenheiro, cientista, teórico, escultor e arquiteto."
   },
   {
     id: "william-shakespeare",
@@ -41,8 +42,8 @@ const mockDeathsToday = [
     deathYear: 1616,
     deathMonth: 4,
     deathDay: 23,
-    category: "Literature",
-    summary: "English playwright, poet and actor, widely regarded as the greatest writer in the English language."
+    category: "Literatura",
+    summary: "Dramaturgo, poeta e ator inglês, amplamente considerado o maior escritor da língua inglesa."
   },
   {
     id: "marie-curie",
@@ -52,8 +53,8 @@ const mockDeathsToday = [
     deathYear: 1934,
     deathMonth: 7,
     deathDay: 4,
-    category: "Science",
-    summary: "Polish and naturalized-French physicist and chemist who conducted pioneering research on radioactivity."
+    category: "Ciência",
+    summary: "Física e química polonesa naturalizada francesa que conduziu pesquisas pioneiras sobre radioatividade."
   },
   {
     id: "mahatma-gandhi",
@@ -63,8 +64,8 @@ const mockDeathsToday = [
     deathYear: 1948,
     deathMonth: 1,
     deathDay: 30,
-    category: "Politics",
-    summary: "Indian lawyer, anti-colonial nationalist and political ethicist who employed nonviolent resistance to lead the successful campaign for India's independence."
+    category: "Política",
+    summary: "Advogado indiano, nacionalista anticolonial e ético político que empregou resistência não violenta para liderar a campanha bem-sucedida pela independência da Índia."
   },
   {
     id: "ludwig-van-beethoven",
@@ -74,8 +75,8 @@ const mockDeathsToday = [
     deathYear: 1827,
     deathMonth: 3,
     deathDay: 26,
-    category: "Music",
-    summary: "German composer and pianist who is among the most influential figures in the history of Western music."
+    category: "Música",
+    summary: "Compositor e pianista alemão que está entre as figuras mais influentes na história da música ocidental."
   }
 ];
 
@@ -104,7 +105,7 @@ const DeathsOnThisDay = () => {
         <div className="mb-6 flex justify-between items-center">
           <Button variant="outline" asChild>
             <Link to="/" className="flex items-center gap-2">
-              <ArrowLeft className="h-4 w-4" /> Back to Home
+              <ArrowLeft className="h-4 w-4" /> Voltar ao Início
             </Link>
           </Button>
         </div>
@@ -114,11 +115,11 @@ const DeathsOnThisDay = () => {
             <div className="bg-posthumous-gold/20 p-3 rounded-full">
               <CalendarDays className="h-8 w-8 text-posthumous-gold" />
             </div>
-            <h1 className="text-3xl md:text-5xl font-bold font-playfair">Deaths On This Day</h1>
+            <h1 className="text-3xl md:text-5xl font-bold font-playfair">Mortes Neste Dia</h1>
           </div>
           <p className="text-lg md:text-xl text-gray-300 max-w-3xl">
-            Remembering notable individuals who passed away on {format(today, "MMMM d")} throughout history.
-            Their legacies continue to inspire and influence our world.
+            Lembrando indivíduos notáveis que faleceram em {format(today, "d 'de' MMMM", {locale: ptBR})} ao longo da história.
+            Seus legados continuam a inspirar e influenciar nosso mundo.
           </p>
         </div>
         
@@ -139,10 +140,10 @@ const DeathsOnThisDay = () => {
         
         {deaths.length === 0 && (
           <div className="text-center py-20">
-            <h2 className="text-2xl font-bold text-posthumous-navy mb-4">No recorded deaths on this day</h2>
+            <h2 className="text-2xl font-bold text-posthumous-navy mb-4">Nenhuma morte registrada neste dia</h2>
             <p className="text-gray-600 max-w-xl mx-auto">
-              Our database doesn't have any records of notable deaths on today's date. 
-              Check back tomorrow or explore our other biographies.
+              Nosso banco de dados não possui registros de mortes notáveis na data de hoje. 
+              Volte amanhã ou explore nossas outras biografias.
             </p>
           </div>
         )}
