@@ -588,7 +588,7 @@ const BiographyPost = () => {
                     />
                     <p className="text-xs text-gray-500 mt-1">
                       Use markdown para formatar o texto. ## para títulos de seção, **texto** para negrito, 
-                      *texto* para itálico, > para citações, - para listas.
+                      *texto* para itálico, {'>'} para citações, - para listas.
                     </p>
                   </div>
                 </CardContent>
