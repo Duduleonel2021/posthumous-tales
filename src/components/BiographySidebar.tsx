@@ -1,5 +1,5 @@
 
-import { Calendar, Globe, Link, MapPin } from "lucide-react";
+import { Calendar, Globe, Link, MapPin, User } from "lucide-react";
 import { Separator } from "./ui/separator";
 
 interface SocialLink {
@@ -11,9 +11,9 @@ interface BiographySidebarProps {
   fullName: string;
   birthDate: string;
   birthPlace: string;
-  deathDate: string;
-  deathPlace: string;
-  causeOfDeath: string;
+  deathDate?: string;
+  deathPlace?: string;
+  causeOfDeath?: string;
   website?: string;
   socialLinks?: SocialLink[];
 }
@@ -29,19 +29,19 @@ const BiographySidebar = ({
   socialLinks,
 }: BiographySidebarProps) => {
   return (
-    <div className="bg-white rounded-lg shadow-md p-4">
-      <h3 className="text-lg font-bold mb-4 text-posthumous-navy">Biography Info</h3>
+    <div className="bg-white rounded-lg shadow-md p-4 sticky top-4">
+      <h3 className="text-lg font-bold mb-4 text-posthumous-navy">Informações Biográficas</h3>
       <Separator className="mb-4" />
       
       <div className="space-y-4">
         <div>
-          <h4 className="text-sm font-semibold text-gray-500">Full Name</h4>
+          <h4 className="text-sm font-semibold text-gray-500">Nome Completo</h4>
           <p className="font-medium">{fullName}</p>
         </div>
         
         <div>
           <h4 className="text-sm font-semibold text-gray-500 flex items-center">
-            <Calendar className="w-4 h-4 mr-1" /> Birth
+            <Calendar className="w-4 h-4 mr-1" /> Nascimento
           </h4>
           <p className="font-medium">{birthDate}</p>
           <p className="text-sm flex items-center text-gray-600">
@@ -49,20 +49,26 @@ const BiographySidebar = ({
           </p>
         </div>
         
-        <div>
-          <h4 className="text-sm font-semibold text-gray-500 flex items-center">
-            <Calendar className="w-4 h-4 mr-1" /> Death
-          </h4>
-          <p className="font-medium">{deathDate}</p>
-          <p className="text-sm flex items-center text-gray-600">
-            <MapPin className="w-3 h-3 mr-1" /> {deathPlace}
-          </p>
-        </div>
+        {deathDate && (
+          <div>
+            <h4 className="text-sm font-semibold text-gray-500 flex items-center">
+              <Calendar className="w-4 h-4 mr-1" /> Falecimento
+            </h4>
+            <p className="font-medium">{deathDate}</p>
+            {deathPlace && (
+              <p className="text-sm flex items-center text-gray-600">
+                <MapPin className="w-3 h-3 mr-1" /> {deathPlace}
+              </p>
+            )}
+          </div>
+        )}
         
-        <div>
-          <h4 className="text-sm font-semibold text-gray-500">Cause of Death</h4>
-          <p className="font-medium">{causeOfDeath}</p>
-        </div>
+        {causeOfDeath && (
+          <div>
+            <h4 className="text-sm font-semibold text-gray-500">Causa da Morte</h4>
+            <p className="font-medium">{causeOfDeath}</p>
+          </div>
+        )}
         
         {website && (
           <div>
@@ -83,7 +89,7 @@ const BiographySidebar = ({
         {socialLinks && socialLinks.length > 0 && (
           <div>
             <h4 className="text-sm font-semibold text-gray-500 flex items-center">
-              <Link className="w-4 h-4 mr-1" /> Social Links
+              <Link className="w-4 h-4 mr-1" /> Links Sociais
             </h4>
             <div className="space-y-1 mt-1">
               {socialLinks.map((link, index) => (

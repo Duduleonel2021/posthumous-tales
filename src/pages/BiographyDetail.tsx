@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Calendar, Tag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -12,6 +12,8 @@ import QuoteBlock from '@/components/QuoteBlock';
 import AuthorInfo from '@/components/AuthorInfo';
 import MostReadWidget from '@/components/MostReadWidget';
 import RelatedBiographiesHub from '@/components/RelatedBiographiesHub';
+import BiographySidebar from '@/components/BiographySidebar';
+import ImageCarousel from '@/components/ImageCarousel';
 
 // Mock data for this biography
 const mockBiography = {
@@ -28,10 +30,43 @@ const mockBiography = {
   category: "Ciência",
   tags: ["Física", "Química", "Radioatividade", "Mulheres na Ciência", "Prêmio Nobel"],
   heroImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Marie_Curie_c1920.jpg/1280px-Marie_Curie_c1920.jpg",
+  featuredImages: [
+    {
+      src: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Marie_Curie_c1920.jpg/800px-Marie_Curie_c1920.jpg",
+      alt: "Marie Curie em seu laboratório, 1920",
+      caption: "Marie Curie trabalhando em seu laboratório, aproximadamente em 1920."
+    },
+    {
+      src: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Pierre_and_Marie_Curie.jpg/800px-Pierre_and_Marie_Curie.jpg",
+      alt: "Marie e Pierre Curie",
+      caption: "Marie e Pierre Curie, uma das mais importantes parcerias científicas da história."
+    },
+    {
+      src: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Marie_Sklodowska_Curie_c1898.jpg/800px-Marie_Sklodowska_Curie_c1898.jpg",
+      alt: "Marie Curie jovem",
+      caption: "Marie Skłodowska Curie em 1898, início de sua carreira científica."
+    }
+  ],
+  fullName: "Maria Salomea Skłodowska-Curie",
+  birthDate: "7 de novembro de 1867",
+  birthPlace: "Varsóvia, Polônia",
+  deathDate: "4 de julho de 1934",
+  deathPlace: "Passy, França",
+  causeOfDeath: "Anemia aplástica causada por exposição prolongada à radiação",
+  website: "https://www.curie.fr/",
+  socialLinks: [
+    {
+      platform: "Instituto Curie",
+      url: "https://www.curie.fr/"
+    },
+    {
+      platform: "Museu Curie",
+      url: "https://musee.curie.fr/"
+    }
+  ],
+  video: "https://www.youtube.com/embed/dCXbUl5x0cI",
   birthYear: 1867,
   deathYear: 1934,
-  birthPlace: "Varsóvia, Polônia",
-  deathPlace: "Passy, França",
   content: `
 ## A Infância e a Educação
 
@@ -127,6 +162,7 @@ const relatedBiographies = [
 
 const BiographyDetail = () => {
   const { id } = useParams();
+  const [activeTab, setActiveTab] = useState('biography');
   const biography = mockBiography; // In a real app, you would fetch this based on the ID
   
   // In a production app, this would be the full URL of the current page
@@ -188,7 +224,7 @@ const BiographyDetail = () => {
                   {biography.tags.map((tag) => (
                     <Link 
                       key={tag} 
-                      to={`/tag/${tag.toLowerCase()}`}
+                      to={`/tag/${tag.toLowerCase().replace(/\s+/g, '-')}`}
                       className="flex items-center gap-1 text-xs bg-gray-100 text-posthumous-navy px-3 py-1 rounded-full hover:bg-gray-200 transition-colors"
                     >
                       <Tag className="h-3 w-3" />
@@ -202,6 +238,13 @@ const BiographyDetail = () => {
                   title={biography.title} 
                   url={pageUrl}
                 />
+                
+                {/* Featured Images Carousel */}
+                {biography.featuredImages && biography.featuredImages.length > 0 && (
+                  <div className="my-8">
+                    <ImageCarousel images={biography.featuredImages} />
+                  </div>
+                )}
                 
                 {/* Biography Content */}
                 <div 
@@ -217,6 +260,22 @@ const BiographyDetail = () => {
                   />
                 )}
                 
+                {/* Video Embed (if available) */}
+                {biography.video && (
+                  <div className="my-8">
+                    <h3 className="text-xl font-bold mb-4">Vídeo Relacionado</h3>
+                    <div className="aspect-w-16 aspect-h-9">
+                      <iframe 
+                        src={biography.video} 
+                        title="Video sobre a biografia"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowFullScreen
+                        className="w-full h-[400px] rounded-lg"
+                      ></iframe>
+                    </div>
+                  </div>
+                )}
+                
                 {/* Tags Bottom */}
                 <div className="mt-8">
                   <h4 className="text-sm font-medium text-gray-500 mb-2">Tags</h4>
@@ -224,7 +283,7 @@ const BiographyDetail = () => {
                     {biography.tags.map((tag) => (
                       <Link 
                         key={tag} 
-                        to={`/tag/${tag.toLowerCase()}`}
+                        to={`/tag/${tag.toLowerCase().replace(/\s+/g, '-')}`}
                         className="text-sm bg-gray-100 text-posthumous-navy px-3 py-1 rounded-full hover:bg-gray-200 transition-colors"
                       >
                         {tag}
@@ -264,6 +323,18 @@ const BiographyDetail = () => {
             
             {/* Sidebar */}
             <div className="w-full lg:w-1/3 space-y-8">
+              {/* Wiki-style Sidebar */}
+              <BiographySidebar
+                fullName={biography.fullName}
+                birthDate={biography.birthDate}
+                birthPlace={biography.birthPlace}
+                deathDate={biography.deathDate}
+                deathPlace={biography.deathPlace}
+                causeOfDeath={biography.causeOfDeath}
+                website={biography.website}
+                socialLinks={biography.socialLinks}
+              />
+              
               {/* Most Read Widget */}
               <MostReadWidget items={[]} />
               
@@ -275,8 +346,6 @@ const BiographyDetail = () => {
                   className="bg-posthumous-gold/5"
                 />
               )}
-              
-              {/* You could add more sidebar widgets here */}
             </div>
           </div>
         </div>

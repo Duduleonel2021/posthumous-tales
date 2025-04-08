@@ -11,6 +11,8 @@ import BiographyPost from "./pages/BiographyPost";
 import CategoryPage from "./pages/CategoryPage";
 import AlphabeticalBiographies from "./pages/AlphabeticalBiographies";
 import DeathsOnThisDay from "./pages/DeathsOnThisDay";
+import TagPage from "./pages/TagPage";
+import AuthorsList from "./pages/AuthorsList";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,7 +31,9 @@ const App = () => (
           <Route path="/categoria/:slug" element={<CategoryPage />} />
           <Route path="/biografias" element={<AlphabeticalBiographies />} />
           <Route path="/mortes-neste-dia" element={<DeathsOnThisDay />} />
-          <Route path="/autor/:id" element={<BiographyDetail />} /> {/* Placeholder for author pages */}
+          <Route path="/autor/:id" element={<BiographyDetail />} />
+          <Route path="/autores" element={<AuthorsList />} />
+          <Route path="/tag/:slug" element={<TagPage />} />
           
           {/* Legacy routes for backward compatibility */}
           <Route path="/biography/:id" element={<BiographyDetail />} />
@@ -38,6 +42,7 @@ const App = () => (
           <Route path="/category/:slug" element={<CategoryPage />} />
           <Route path="/biographies" element={<AlphabeticalBiographies />} />
           <Route path="/deaths-on-this-day" element={<DeathsOnThisDay />} />
+          <Route path="/authors" element={<AuthorsList />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

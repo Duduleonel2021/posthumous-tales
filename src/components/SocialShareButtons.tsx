@@ -1,5 +1,5 @@
 
-import { Share2, Facebook, Twitter, Linkedin, Mail, Link as LinkIcon } from "lucide-react";
+import { Share2, Facebook, Twitter, Linkedin, Mail, Link as LinkIcon, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { 
   DropdownMenu,
@@ -59,6 +59,17 @@ const SocialShareButtons = ({ title, url }: SocialShareButtonsProps) => {
         >
           <Button size="icon" variant="outline" className="rounded-full w-8 h-8 p-0">
             <Linkedin className="h-4 w-4 text-blue-700" />
+          </Button>
+        </a>
+        
+        <a 
+          href={`https://api.whatsapp.com/send?text=${encodedTitle}%20${encodedUrl}`} 
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Compartilhar no WhatsApp"
+        >
+          <Button size="icon" variant="outline" className="rounded-full w-8 h-8 p-0">
+            <Phone className="h-4 w-4 text-green-600" />
           </Button>
         </a>
         
