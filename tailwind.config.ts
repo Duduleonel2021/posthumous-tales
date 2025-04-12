@@ -110,6 +110,10 @@ export default {
 				scaleIn: {
 					'0%': { opacity: '0', transform: 'scale(0.95)' },
 					'100%': { opacity: '1', transform: 'scale(1)' }
+				},
+				float: {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-10px)' }
 				}
 			},
 			animation: {
@@ -117,7 +121,8 @@ export default {
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in': 'fadeIn 0.5s ease-out forwards',
 				'slide-in-right': 'slideInRight 0.5s ease-out forwards',
-				'scale-in': 'scaleIn 0.5s ease-out forwards'
+				'scale-in': 'scaleIn 0.5s ease-out forwards',
+				'float': 'float 6s ease-in-out infinite'
 			},
 			fontFamily: {
 				'playfair': ['"Playfair Display"', 'serif'],
@@ -126,7 +131,8 @@ export default {
 			},
 			boxShadow: {
 				'card': '0 4px 20px rgba(0, 0, 0, 0.05)',
-				'card-hover': '0 10px 25px rgba(0, 0, 0, 0.07)'
+				'card-hover': '0 10px 25px rgba(0, 0, 0, 0.07)',
+				'magazine': '0 10px 30px rgba(0, 0, 0, 0.1)'
 			},
 			typography: {
 				DEFAULT: {

@@ -11,7 +11,7 @@ const Footer = () => {
   return (
     <footer>
       {/* Newsletter Section */}
-      <div className="bg-posthumous-navy/5 py-12">
+      <div className="bg-gradient-to-r from-posthumous-lightteal to-posthumous-lightgold/30 py-12">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h3 className="text-2xl md:text-3xl font-bold mb-4 text-posthumous-navy font-playfair">
@@ -78,6 +78,7 @@ const Footer = () => {
                 </a>
               </div>
             </div>
+
             <div>
               <h3 className="text-xl font-playfair font-semibold mb-4">Explorar</h3>
               <ul className="mt-2 space-y-3">
@@ -101,6 +102,7 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
+            
             <div>
               <h3 className="text-xl font-playfair font-semibold mb-4">Sobre Nós</h3>
               <ul className="mt-2 space-y-3">
@@ -122,6 +124,7 @@ const Footer = () => {
               </ul>
             </div>
           </div>
+          
           <div className="pt-8 mt-8 border-t border-gray-700">
             <div className="flex flex-col md:flex-row justify-between items-center">
               <p className="text-center text-gray-400 text-sm">

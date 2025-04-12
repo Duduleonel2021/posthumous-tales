@@ -329,3 +329,62 @@
 .magazine-card {
   @apply bg-white border border-gray-200 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-lg;
 }
+
+/* Custom Super Abril inspired layout elements */
+.super-gradient-bg {
+  @apply bg-gradient-to-b from-white via-posthumous-gray to-white;
+}
+
+.super-title-style {
+  @apply text-3xl md:text-4xl lg:text-5xl font-bold font-playfair text-posthumous-navy after:content-[''] after:block after:w-24 after:h-1 after:bg-posthumous-gold after:mt-2;
+}
+
+.super-header {
+  @apply flex flex-col md:flex-row justify-between items-start md:items-center mb-6 pb-2 border-b border-gray-200;
+}
+
+.super-header h2 {
+  @apply text-2xl md:text-3xl font-bold font-playfair text-posthumous-navy relative;
+}
+
+.super-header h2::after {
+  @apply content-[''] absolute left-0 -bottom-2 w-12 h-1 bg-posthumous-gold;
+}
+
+.super-card {
+  @apply relative p-5 bg-white shadow-magazine rounded-lg overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl border border-gray-100;
+}
+
+.super-link {
+  @apply inline-flex items-center text-posthumous-gold hover:text-posthumous-navy transition-colors gap-1 font-medium;
+}
+
+.super-tag {
+  @apply inline-block px-3 py-1 bg-posthumous-lightgold text-posthumous-navy text-xs font-medium rounded-md;
+}
+
+.super-featured-badge {
+  @apply absolute top-4 right-4 bg-posthumous-gold/90 text-white px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider z-10 shadow-md;
+}
+
+/* Magazine grid layouts */
+.magazine-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
+}
+
+.magazine-feature-grid {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-6;
+}
+
+.magazine-feature-grid > div:first-child {
+  @apply md:col-span-2 lg:col-span-2;
+}
+
+/* Improved sectioning */
+.magazine-section {
+  @apply py-10 border-b border-gray-200 last:border-b-0;
+}
+
+.magazine-section-title {
+  @apply text-xl md:text-2xl font-bold mb-6 pb-2 border-b border-gray-200 inline-block;
+}

@@ -48,14 +48,14 @@ const FeaturedBiographies = ({ biographies }: FeaturedBiographiesProps) => {
   const biography = biographies[currentIndex];
 
   return (
-    <div className="relative overflow-hidden bg-posthumous-navy rounded-2xl shadow-lg">
+    <div className="relative overflow-hidden bg-posthumous-navy rounded-2xl shadow-xl">
       <div className="absolute inset-0">
         <img
           src={biography.image}
           alt={biography.name}
           className="object-cover w-full h-full opacity-20 transition-transform duration-1000 ease-out scale-105"
           style={{ 
-            filter: "blur(3px)",
+            filter: "blur(1px)",
             transform: isAnimating ? "scale(1.15)" : "scale(1.05)"
           }}
           onError={(e) => {
@@ -66,19 +66,22 @@ const FeaturedBiographies = ({ biographies }: FeaturedBiographiesProps) => {
       </div>
       <div className="relative z-10 p-8 md:p-14 flex flex-col h-full min-h-[480px] md:min-h-[600px]">
         <div className={`transition-all duration-700 ${isAnimating ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'}`}>
-          <Link
-            to={`/category/${biography.category.toLowerCase().replace(/\s+/g, "-")}`}
-            className="inline-block px-3 py-1 mb-6 text-xs font-semibold bg-posthumous-gold text-posthumous-navy rounded-md hover:bg-white transition-colors uppercase tracking-wider"
-          >
-            {biography.category}
-          </Link>
+          <div className="mb-6 flex items-center space-x-2">
+            <Link
+              to={`/categoria/${biography.category.toLowerCase().replace(/\s+/g, "-")}`}
+              className="inline-block px-3 py-1 text-xs font-semibold bg-posthumous-gold text-posthumous-navy rounded-md hover:bg-white transition-colors uppercase tracking-wider"
+            >
+              {biography.category}
+            </Link>
+            <span className="text-white/70 text-sm">Biografia em Destaque</span>
+          </div>
           <h2 className="text-4xl md:text-7xl font-playfair font-bold mb-4 text-white leading-tight">{biography.name}</h2>
           <p className="text-gray-300 mb-6 text-xl md:text-2xl font-light">{biography.years}</p>
           <p className="text-lg max-w-3xl mb-8 md:mb-10 line-clamp-3 md:line-clamp-4 text-gray-200 leading-relaxed font-inter">
             {biography.summary}
           </p>
           <Button asChild size="lg" className="bg-posthumous-gold text-posthumous-navy hover:bg-white transition-colors font-medium px-8 py-6 text-base rounded-md shadow-lg hover:shadow-xl">
-            <Link to={`/biography/${biography.id}`}>Read Full Biography</Link>
+            <Link to={`/biografia/${biography.id}`}>Ler Biografia Completa</Link>
           </Button>
         </div>
         <div className="flex justify-between items-center mt-auto">
