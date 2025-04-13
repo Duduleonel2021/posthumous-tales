@@ -13,7 +13,7 @@ const QuoteBlock = ({ text, author, className = "" }: QuoteBlockProps) => {
       <div className="absolute top-0 left-0 w-20 h-20 flex items-center justify-center text-posthumous-gold/20">
         <Quote className="h-14 w-14" />
       </div>
-      <blockquote className="p-8 pl-12">
+      <blockquote className="p-8 pl-16">
         <p className="text-xl md:text-2xl italic font-playfair text-posthumous-navy leading-relaxed">
           "{text}"
         </p>

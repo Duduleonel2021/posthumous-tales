@@ -23,7 +23,7 @@ const BiographyCard = ({
   return (
     <div className="group overflow-hidden bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-500 border border-gray-100">
       <Link to={`/biografia/${id}`} className="block overflow-hidden">
-        <div className="relative h-60 overflow-hidden">
+        <div className="relative h-80 overflow-hidden">
           <img
             src={image}
             alt={name}

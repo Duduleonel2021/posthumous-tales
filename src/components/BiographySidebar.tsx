@@ -1,5 +1,5 @@
 
-import { Calendar, Globe, Link, MapPin, User } from "lucide-react";
+import { Calendar, Globe, Link as LinkIcon, MapPin, User } from "lucide-react";
 import { Separator } from "./ui/separator";
 
 interface SocialLink {
@@ -29,8 +29,10 @@ const BiographySidebar = ({
   socialLinks,
 }: BiographySidebarProps) => {
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 sticky top-4">
-      <h3 className="text-lg font-bold mb-4 text-posthumous-navy">Informações Biográficas</h3>
+    <div className="biography-sidebar">
+      <h3 className="text-xl font-bold mb-4 text-posthumous-navy font-playfair after:content-[''] after:block after:w-16 after:h-0.5 after:bg-posthumous-gold after:mt-2">
+        Informações Biográficas
+      </h3>
       <Separator className="mb-4" />
       
       <div className="space-y-4">
@@ -41,23 +43,23 @@ const BiographySidebar = ({
         
         <div>
           <h4 className="text-sm font-semibold text-gray-500 flex items-center">
-            <Calendar className="w-4 h-4 mr-1" /> Nascimento
+            <Calendar className="w-4 h-4 mr-1 text-posthumous-gold" /> Nascimento
           </h4>
           <p className="font-medium">{birthDate}</p>
           <p className="text-sm flex items-center text-gray-600">
-            <MapPin className="w-3 h-3 mr-1" /> {birthPlace}
+            <MapPin className="w-3 h-3 mr-1 text-posthumous-gold/70" /> {birthPlace}
           </p>
         </div>
         
         {deathDate && (
           <div>
             <h4 className="text-sm font-semibold text-gray-500 flex items-center">
-              <Calendar className="w-4 h-4 mr-1" /> Falecimento
+              <Calendar className="w-4 h-4 mr-1 text-posthumous-gold" /> Falecimento
             </h4>
             <p className="font-medium">{deathDate}</p>
             {deathPlace && (
               <p className="text-sm flex items-center text-gray-600">
-                <MapPin className="w-3 h-3 mr-1" /> {deathPlace}
+                <MapPin className="w-3 h-3 mr-1 text-posthumous-gold/70" /> {deathPlace}
               </p>
             )}
           </div>
@@ -73,13 +75,13 @@ const BiographySidebar = ({
         {website && (
           <div>
             <h4 className="text-sm font-semibold text-gray-500 flex items-center">
-              <Globe className="w-4 h-4 mr-1" /> Website
+              <Globe className="w-4 h-4 mr-1 text-posthumous-gold" /> Website
             </h4>
             <a
               href={website}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 hover:underline truncate block"
+              className="text-posthumous-gold hover:text-posthumous-navy transition-colors hover:underline truncate block"
             >
               {new URL(website).hostname}
             </a>
@@ -89,16 +91,16 @@ const BiographySidebar = ({
         {socialLinks && socialLinks.length > 0 && (
           <div>
             <h4 className="text-sm font-semibold text-gray-500 flex items-center">
-              <Link className="w-4 h-4 mr-1" /> Links Sociais
+              <LinkIcon className="w-4 h-4 mr-1 text-posthumous-gold" /> Links Sociais
             </h4>
-            <div className="space-y-1 mt-1">
+            <div className="space-y-2 mt-1">
               {socialLinks.map((link, index) => (
                 <a
                   key={index}
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 hover:underline block"
+                  className="text-posthumous-gold hover:text-posthumous-navy transition-colors hover:underline block"
                 >
                   {link.platform}
                 </a>
