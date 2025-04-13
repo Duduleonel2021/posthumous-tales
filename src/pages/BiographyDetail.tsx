@@ -1,8 +1,6 @@
-
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Calendar, Tag } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Tag } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -14,6 +12,10 @@ import MostReadWidget from '@/components/MostReadWidget';
 import RelatedBiographiesHub from '@/components/RelatedBiographiesHub';
 import BiographySidebar from '@/components/BiographySidebar';
 import ImageCarousel from '@/components/ImageCarousel';
+import HeroSection from '@/components/biography/HeroSection';
+import TagsList from '@/components/biography/TagsList';
+import BiographyContent from '@/components/biography/BiographyContent';
+import VideoEmbed from '@/components/biography/VideoEmbed';
 
 // Mock data for this biography
 const mockBiography = {
@@ -84,7 +86,7 @@ Em 1894, conheceu Pierre Curie, um físico reconhecido que trabalhava na Escola 
 
 Inspirada pelos recentes trabalhos de Henri Becquerel sobre os raios emitidos pelo urânio, Marie decidiu investigar esse fenômeno para seu doutorado. Trabalhando em condições improvisadas em um galpão sem isolamento adequado, ela descobriu que o tório também emitia radiações similares.
 
-Mais importante ainda, percebeu que a pechblenda (minério de urânio) emitia radiações mais intensas do que o urânio puro, sugerindo a existença de elementos desconhecidos. Junto com Pierre, isolou dois novos elementos: o polônio (nomeado em homenagem à sua terra natal) e o rádio.
+Mais importante ainda, percebeu que a pechblenda (minério de urânio) emitia radiações mais intensas do que o urânio puro, sugerindo a existência de elementos desconhecidos. Junto com Pierre, isolou dois novos elementos: o polônio (nomeado em homenagem à sua terra natal) e o rádio.
 
 Em 1903, Marie, Pierre e Henri Becquerel receberam o Prêmio Nobel de Física pelo estudo das radiações. Marie tornou-se a primeira mulher a receber esse prêmio.
 
@@ -168,50 +170,18 @@ const BiographyDetail = () => {
   // In a production app, this would be the full URL of the current page
   const pageUrl = `https://meusite.com.br/biografia/${id}`;
 
-  const markdownToHtml = (markdown: string) => {
-    // This is a simple markdown parser just for demonstration
-    // In a real app, you would use a proper markdown library like marked or remark
-    return markdown
-      .replace(/^## (.*$)/gm, '<h2 class="text-2xl font-bold mt-8 mb-4">$1</h2>')
-      .replace(/\n/g, '<br />');
-  };
-
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Header />
       
       <main className="flex-grow">
         {/* Hero Section */}
-        <div 
-          className="w-full h-[40vh] md:h-[50vh] bg-cover bg-center relative"
-          style={{ backgroundImage: `url(${biography.heroImage})` }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
-          <div className="container mx-auto px-4 h-full flex flex-col justify-end pb-8">
-            <div className="text-white relative z-10 animate-fade-in">
-              <Link to="/" className="inline-flex items-center text-white/80 hover:text-white mb-4 transition-colors">
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                Voltar ao Início
-              </Link>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-playfair mb-4">
-                {biography.title}
-              </h1>
-              <div className="flex flex-wrap items-center gap-4 text-sm">
-                <span className="flex items-center gap-1">
-                  <Calendar className="h-4 w-4 text-posthumous-gold" /> 
-                  Publicado em {biography.publishDate}
-                </span>
-                <span>•</span>
-                <Link 
-                  to={`/categoria/${biography.category.toLowerCase()}`}
-                  className="bg-posthumous-gold/30 text-white px-3 py-1 rounded-full hover:bg-posthumous-gold/50 transition-colors"
-                >
-                  {biography.category}
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
+        <HeroSection 
+          heroImage={biography.heroImage}
+          title={biography.title}
+          publishDate={biography.publishDate}
+          category={biography.category}
+        />
 
         <div className="container mx-auto px-4 py-8">
           <div className="flex flex-col lg:flex-row gap-8">
@@ -220,18 +190,7 @@ const BiographyDetail = () => {
               {/* Content */}
               <article className="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-gray-100">
                 {/* Tags Section */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {biography.tags.map((tag) => (
-                    <Link 
-                      key={tag} 
-                      to={`/tag/${tag.toLowerCase().replace(/\s+/g, '-')}`}
-                      className="flex items-center gap-1 text-xs bg-gray-100 text-posthumous-navy px-3 py-1 rounded-full hover:bg-gray-200 transition-colors"
-                    >
-                      <Tag className="h-3 w-3" />
-                      {tag}
-                    </Link>
-                  ))}
-                </div>
+                <TagsList tags={biography.tags} showIcons={true} className="mb-6" />
                 
                 {/* Social Share Buttons */}
                 <SocialShareButtons 
@@ -247,10 +206,7 @@ const BiographyDetail = () => {
                 )}
                 
                 {/* Biography Content */}
-                <div 
-                  className="biography-content my-8"
-                  dangerouslySetInnerHTML={{ __html: markdownToHtml(biography.content) }}
-                />
+                <BiographyContent content={biography.content} />
                 
                 {/* Featured Quote */}
                 {biography.quotes && biography.quotes.length > 0 && (
@@ -261,35 +217,12 @@ const BiographyDetail = () => {
                 )}
                 
                 {/* Video Embed (if available) */}
-                {biography.video && (
-                  <div className="my-8">
-                    <h3 className="text-xl font-bold mb-4">Vídeo Relacionado</h3>
-                    <div className="aspect-w-16 aspect-h-9">
-                      <iframe 
-                        src={biography.video} 
-                        title="Video sobre a biografia"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowFullScreen
-                        className="w-full h-[400px] rounded-lg"
-                      ></iframe>
-                    </div>
-                  </div>
-                )}
+                {biography.video && <VideoEmbed videoUrl={biography.video} />}
                 
                 {/* Tags Bottom */}
                 <div className="mt-8">
                   <h4 className="text-sm font-medium text-gray-500 mb-2">Tags</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {biography.tags.map((tag) => (
-                      <Link 
-                        key={tag} 
-                        to={`/tag/${tag.toLowerCase().replace(/\s+/g, '-')}`}
-                        className="text-sm bg-gray-100 text-posthumous-navy px-3 py-1 rounded-full hover:bg-gray-200 transition-colors"
-                      >
-                        {tag}
-                      </Link>
-                    ))}
-                  </div>
+                  <TagsList tags={biography.tags} />
                 </div>
                 
                 {/* Social Share Buttons (Bottom) */}
