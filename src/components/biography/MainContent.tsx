@@ -1,13 +1,11 @@
 
 import React from 'react';
-import { Separator } from '@/components/ui/separator';
-import SocialShareButtons from '@/components/SocialShareButtons';
 import QuoteBlock from '@/components/QuoteBlock';
-import TagsList from '@/components/biography/TagsList';
 import BiographyContent from '@/components/biography/BiographyContent';
 import VideoEmbed from '@/components/biography/VideoEmbed';
-import AuthorInfo from '@/components/AuthorInfo';
-import ImageCarousel from '@/components/ImageCarousel';
+import BiographyHeader from '@/components/biography/BiographyHeader';
+import BiographyGallery from '@/components/biography/BiographyGallery';
+import BiographyFooter from '@/components/biography/BiographyFooter';
 
 interface MainContentProps {
   biography: {
@@ -51,13 +49,11 @@ const MainContent = ({ biography, pageUrl }: MainContentProps) => {
 
   return (
     <article className="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-gray-100">
-      {/* Tags Section */}
-      <TagsList tags={biography.tags} showIcons={true} className="mb-6" />
-      
-      {/* Social Share Buttons */}
-      <SocialShareButtons 
-        title={biography.title} 
-        url={pageUrl}
+      {/* Header: Tags and Social Share */}
+      <BiographyHeader 
+        title={biography.title}
+        tags={biography.tags} 
+        pageUrl={pageUrl} 
       />
       
       {/* Featured Portrait Image and Video */}
@@ -72,10 +68,7 @@ const MainContent = ({ biography, pageUrl }: MainContentProps) => {
       
       {/* Featured Images Carousel */}
       {biography.featuredImages && biography.featuredImages.length > 0 && (
-        <div className="my-8">
-          <h3 className="text-xl font-bold mb-4">Galeria de Imagens</h3>
-          <ImageCarousel images={biography.featuredImages} />
-        </div>
+        <BiographyGallery images={biography.featuredImages} />
       )}
       
       {/* Biography Content */}
@@ -89,27 +82,12 @@ const MainContent = ({ biography, pageUrl }: MainContentProps) => {
         />
       )}
       
-      {/* Tags Bottom */}
-      <div className="mt-8">
-        <h4 className="text-sm font-medium text-gray-500 mb-2">Tags</h4>
-        <TagsList tags={biography.tags} />
-      </div>
-      
-      {/* Social Share Buttons (Bottom) */}
-      <div className="mt-8">
-        <Separator className="mb-6" />
-        <SocialShareButtons 
-          title={biography.title} 
-          url={pageUrl}
-        />
-      </div>
-      
-      {/* Author Info */}
-      <AuthorInfo 
-        name={biography.author.name}
-        id={biography.author.id}
-        image={biography.author.image}
-        bio={biography.author.bio}
+      {/* Footer: Tags, Social Share, and Author Info */}
+      <BiographyFooter 
+        tags={biography.tags}
+        title={biography.title}
+        pageUrl={pageUrl}
+        author={biography.author}
         publishDate={biography.publishDate}
       />
     </article>
