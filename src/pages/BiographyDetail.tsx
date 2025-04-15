@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import HeroSection from '@/components/biography/HeroSection';
+import BiographyLayout from '@/components/biography/BiographyLayout';
+import BiographyContentContainer from '@/components/biography/BiographyContentContainer';
 import MainContent from '@/components/biography/MainContent';
 import SidebarContent from '@/components/biography/SidebarContent';
 import BiographyExtras from '@/components/biography/BiographyExtras';
@@ -154,48 +153,38 @@ const relatedBiographies = [
 
 const BiographyDetail = () => {
   const { id } = useParams();
-  const [activeTab, setActiveTab] = useState('biography');
   const biography = mockBiography; // In a real app, you would fetch this based on the ID
   
   // In a production app, this would be the full URL of the current page
   const pageUrl = `https://meusite.com.br/biografia/${id}`;
 
-  return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
-      <Header />
+  // Main content including the main article and extras
+  const mainContentSection = (
+    <>
+      {/* Main Content */}
+      <MainContent biography={biography} pageUrl={pageUrl} />
       
-      <main className="flex-grow">
-        {/* Hero Section */}
-        <HeroSection 
-          heroImage={biography.heroImage}
-          title={biography.title}
-          publishDate={biography.publishDate}
-          category={biography.category}
-        />
+      {/* Comments and Related Biographies */}
+      <BiographyExtras 
+        biographyId={biography.id}
+        categoryName={biography.category}
+        relatedBiographies={relatedBiographies}
+      />
+    </>
+  );
 
-        <div className="container mx-auto px-4 py-8">
-          <div className="flex flex-col lg:flex-row gap-8">
-            {/* Main Content */}
-            <div className="w-full lg:w-2/3">
-              {/* Content */}
-              <MainContent biography={biography} pageUrl={pageUrl} />
-              
-              {/* Comments and Related Biographies */}
-              <BiographyExtras 
-                biographyId={biography.id}
-                categoryName={biography.category}
-                relatedBiographies={relatedBiographies}
-              />
-            </div>
-            
-            {/* Sidebar */}
-            <SidebarContent biography={biography} />
-          </div>
-        </div>
-      </main>
-
-      <Footer />
-    </div>
+  return (
+    <BiographyLayout
+      heroImage={biography.heroImage}
+      title={biography.title}
+      publishDate={biography.publishDate}
+      category={biography.category}
+    >
+      <BiographyContentContainer
+        mainContent={mainContentSection}
+        sidebarContent={<SidebarContent biography={biography} />}
+      />
+    </BiographyLayout>
   );
 };
 
