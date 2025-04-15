@@ -170,6 +170,13 @@ const BiographyDetail = () => {
   // In a production app, this would be the full URL of the current page
   const pageUrl = `https://meusite.com.br/biografia/${id}`;
 
+  // Featured portrait image for the biography
+  const portraitImage = {
+    src: biography.heroImage,
+    alt: `Retrato de ${biography.fullName}`,
+    caption: `${biography.fullName} (${biography.birthYear}-${biography.deathYear}) - ${biography.category}`
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Header />
@@ -198,6 +205,12 @@ const BiographyDetail = () => {
                   url={pageUrl}
                 />
                 
+                {/* Featured Portrait Image (Added before other content) */}
+                <VideoEmbed 
+                  videoUrl={biography.video}
+                  portraitImage={portraitImage}
+                />
+                
                 {/* Featured Images Carousel */}
                 {biography.featuredImages && biography.featuredImages.length > 0 && (
                   <div className="my-8">
@@ -215,9 +228,6 @@ const BiographyDetail = () => {
                     author={biography.quotes[0].author}
                   />
                 )}
-                
-                {/* Video Embed (if available) */}
-                {biography.video && <VideoEmbed videoUrl={biography.video} />}
                 
                 {/* Tags Bottom */}
                 <div className="mt-8">
