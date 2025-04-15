@@ -1,5 +1,6 @@
 
 import { Image } from "lucide-react";
+import PortraitDisplay from './PortraitDisplay';
 
 interface VideoEmbedProps {
   videoUrl: string;
@@ -8,28 +9,30 @@ interface VideoEmbedProps {
     alt: string;
     caption?: string;
   };
+  fullName?: string;
+  birthYear?: number;
+  deathYear?: number;
+  category?: string;
 }
 
-const VideoEmbed = ({ videoUrl, portraitImage }: VideoEmbedProps) => {
+const VideoEmbed = ({ 
+  videoUrl, 
+  portraitImage,
+  fullName = "",
+  birthYear = 0,
+  deathYear,
+  category = ""
+}: VideoEmbedProps) => {
   return (
     <div className="my-8 space-y-8">
-      {portraitImage && (
-        <div className="portrait-image-container">
-          <figure className="mx-auto max-w-md overflow-hidden rounded-xl border border-gray-200 bg-white p-3 shadow-sm">
-            <div className="relative overflow-hidden rounded-lg">
-              <img 
-                src={portraitImage.src} 
-                alt={portraitImage.alt}
-                className="mx-auto h-auto w-full max-w-sm object-cover"
-              />
-            </div>
-            {portraitImage.caption && (
-              <figcaption className="mt-3 border-t border-gray-100 pt-3 text-center text-sm text-gray-500 italic">
-                {portraitImage.caption}
-              </figcaption>
-            )}
-          </figure>
-        </div>
+      {portraitImage && fullName && (
+        <PortraitDisplay 
+          image={portraitImage}
+          fullName={fullName}
+          birthYear={birthYear}
+          deathYear={deathYear}
+          category={category}
+        />
       )}
       
       <div>

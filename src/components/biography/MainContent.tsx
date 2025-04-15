@@ -60,15 +60,20 @@ const MainContent = ({ biography, pageUrl }: MainContentProps) => {
         url={pageUrl}
       />
       
-      {/* Featured Portrait Image (Added before other content) */}
+      {/* Featured Portrait Image and Video */}
       <VideoEmbed 
         videoUrl={biography.video}
         portraitImage={portraitImage}
+        fullName={biography.fullName}
+        birthYear={biography.birthYear}
+        deathYear={biography.deathYear}
+        category={biography.category}
       />
       
       {/* Featured Images Carousel */}
       {biography.featuredImages && biography.featuredImages.length > 0 && (
         <div className="my-8">
+          <h3 className="text-xl font-bold mb-4">Galeria de Imagens</h3>
           <ImageCarousel images={biography.featuredImages} />
         </div>
       )}
