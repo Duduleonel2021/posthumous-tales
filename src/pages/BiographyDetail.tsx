@@ -1,21 +1,11 @@
 import React, { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { Tag } from 'lucide-react';
-import { Separator } from '@/components/ui/separator';
+import { useParams } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import SocialShareButtons from '@/components/SocialShareButtons';
-import CommentSection from '@/components/CommentSection';
-import QuoteBlock from '@/components/QuoteBlock';
-import AuthorInfo from '@/components/AuthorInfo';
-import MostReadWidget from '@/components/MostReadWidget';
-import RelatedBiographiesHub from '@/components/RelatedBiographiesHub';
-import BiographySidebar from '@/components/BiographySidebar';
-import ImageCarousel from '@/components/ImageCarousel';
 import HeroSection from '@/components/biography/HeroSection';
-import TagsList from '@/components/biography/TagsList';
-import BiographyContent from '@/components/biography/BiographyContent';
-import VideoEmbed from '@/components/biography/VideoEmbed';
+import MainContent from '@/components/biography/MainContent';
+import SidebarContent from '@/components/biography/SidebarContent';
+import BiographyExtras from '@/components/biography/BiographyExtras';
 
 // Mock data for this biography
 const mockBiography = {
@@ -170,13 +160,6 @@ const BiographyDetail = () => {
   // In a production app, this would be the full URL of the current page
   const pageUrl = `https://meusite.com.br/biografia/${id}`;
 
-  // Featured portrait image for the biography
-  const portraitImage = {
-    src: biography.heroImage,
-    alt: `Retrato de ${biography.fullName}`,
-    caption: `${biography.fullName} (${biography.birthYear}-${biography.deathYear}) - ${biography.category}`
-  };
-
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Header />
@@ -195,101 +178,18 @@ const BiographyDetail = () => {
             {/* Main Content */}
             <div className="w-full lg:w-2/3">
               {/* Content */}
-              <article className="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-gray-100">
-                {/* Tags Section */}
-                <TagsList tags={biography.tags} showIcons={true} className="mb-6" />
-                
-                {/* Social Share Buttons */}
-                <SocialShareButtons 
-                  title={biography.title} 
-                  url={pageUrl}
-                />
-                
-                {/* Featured Portrait Image (Added before other content) */}
-                <VideoEmbed 
-                  videoUrl={biography.video}
-                  portraitImage={portraitImage}
-                />
-                
-                {/* Featured Images Carousel */}
-                {biography.featuredImages && biography.featuredImages.length > 0 && (
-                  <div className="my-8">
-                    <ImageCarousel images={biography.featuredImages} />
-                  </div>
-                )}
-                
-                {/* Biography Content */}
-                <BiographyContent content={biography.content} />
-                
-                {/* Featured Quote */}
-                {biography.quotes && biography.quotes.length > 0 && (
-                  <QuoteBlock 
-                    text={biography.quotes[0].text}
-                    author={biography.quotes[0].author}
-                  />
-                )}
-                
-                {/* Tags Bottom */}
-                <div className="mt-8">
-                  <h4 className="text-sm font-medium text-gray-500 mb-2">Tags</h4>
-                  <TagsList tags={biography.tags} />
-                </div>
-                
-                {/* Social Share Buttons (Bottom) */}
-                <div className="mt-8">
-                  <Separator className="mb-6" />
-                  <SocialShareButtons 
-                    title={biography.title} 
-                    url={pageUrl}
-                  />
-                </div>
-                
-                {/* Author Info */}
-                <AuthorInfo 
-                  name={biography.author.name}
-                  id={biography.author.id}
-                  image={biography.author.image}
-                  bio={biography.author.bio}
-                  publishDate={biography.publishDate}
-                />
-              </article>
+              <MainContent biography={biography} pageUrl={pageUrl} />
               
-              {/* Comments Section */}
-              <CommentSection biographyId={biography.id} comments={[]} />
-              
-              {/* Related Biographies */}
-              <RelatedBiographiesHub 
+              {/* Comments and Related Biographies */}
+              <BiographyExtras 
+                biographyId={biography.id}
                 categoryName={biography.category}
                 relatedBiographies={relatedBiographies}
               />
             </div>
             
             {/* Sidebar */}
-            <div className="w-full lg:w-1/3 space-y-8">
-              {/* Wiki-style Sidebar */}
-              <BiographySidebar
-                fullName={biography.fullName}
-                birthDate={biography.birthDate}
-                birthPlace={biography.birthPlace}
-                deathDate={biography.deathDate}
-                deathPlace={biography.deathPlace}
-                causeOfDeath={biography.causeOfDeath}
-                website={biography.website}
-                socialLinks={biography.socialLinks}
-              />
-              
-              {/* Most Read Widget */}
-              <MostReadWidget items={[]} />
-              
-              {/* Additional Quote */}
-              {biography.quotes && biography.quotes.length > 1 && (
-                <QuoteBlock 
-                  text={biography.quotes[1].text}
-                  author={biography.quotes[1].author}
-                  className="bg-posthumous-gold/5"
-                />
-              )}
-            </div>
+            <SidebarContent biography={biography} />
           </div>
         </div>
       </main>
