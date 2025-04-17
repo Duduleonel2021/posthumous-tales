@@ -39,17 +39,17 @@ const SidebarContent = ({ biography }: SidebarContentProps) => {
         socialLinks={biography.socialLinks}
       />
       
-      {/* Most Read Widget */}
-      <MostReadWidget items={[]} />
-      
-      {/* Additional Quote - Moved after the biographical info */}
+      {/* Additional Quote - Colocado após as informações biográficas com espaço adicional */}
       {biography.quotes && biography.quotes.length > 1 && (
         <QuoteBlock 
           text={biography.quotes[1].text}
           author={biography.quotes[1].author}
-          className="bg-posthumous-gold/5 mt-8"
+          className="mt-8"
         />
       )}
+      
+      {/* Most Read Widget - Movido para depois da citação */}
+      <MostReadWidget items={[]} />
     </div>
   );
 };
