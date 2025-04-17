@@ -1,6 +1,7 @@
 
-import { Image } from "lucide-react";
+import React from 'react';
 import PortraitDisplay from './PortraitDisplay';
+import VideoPlayer from './VideoPlayer';
 
 interface VideoEmbedProps {
   videoUrl: string;
@@ -35,18 +36,7 @@ const VideoEmbed = ({
         />
       )}
       
-      <div>
-        <h3 className="text-xl font-bold mb-4">Vídeo Relacionado</h3>
-        <div className="aspect-w-16 aspect-h-9">
-          <iframe 
-            src={videoUrl} 
-            title="Video sobre a biografia"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowFullScreen
-            className="w-full h-[400px] rounded-lg"
-          ></iframe>
-        </div>
-      </div>
+      <VideoPlayer videoUrl={videoUrl} />
     </div>
   );
 };
