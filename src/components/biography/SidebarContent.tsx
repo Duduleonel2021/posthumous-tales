@@ -42,12 +42,12 @@ const SidebarContent = ({ biography }: SidebarContentProps) => {
       {/* Most Read Widget */}
       <MostReadWidget items={[]} />
       
-      {/* Additional Quote */}
+      {/* Additional Quote - Moved after the biographical info */}
       {biography.quotes && biography.quotes.length > 1 && (
         <QuoteBlock 
           text={biography.quotes[1].text}
           author={biography.quotes[1].author}
-          className="bg-posthumous-gold/5"
+          className="bg-posthumous-gold/5 mt-8"
         />
       )}
     </div>
