@@ -1,12 +1,8 @@
 
 import { useState, useRef, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Maximize } from 'lucide-react';
-import { Button } from './ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import SingleImageDisplay from './carousel/SingleImageDisplay';
+import CarouselSlide from './carousel/CarouselSlide';
+import CarouselNavigation from './carousel/CarouselNavigation';
 
 interface ImageCarouselProps {
   images: {
@@ -67,43 +63,7 @@ const ImageCarousel = ({ images }: ImageCarouselProps) => {
 
   // If there's only one image, display it without carousel controls
   if (images.length === 1) {
-    const image = images[0];
-    return (
-      <div className="overflow-hidden rounded-lg">
-        <figure className="relative">
-          <Dialog>
-            <DialogTrigger asChild>
-              <div className="relative cursor-pointer group">
-                <img 
-                  src={image.src} 
-                  alt={image.alt}
-                  className="w-full h-auto object-cover rounded-lg"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
-                  <Button variant="secondary" size="sm" className="flex items-center gap-1">
-                    <Maximize className="h-4 w-4" /> Ampliar
-                  </Button>
-                </div>
-              </div>
-            </DialogTrigger>
-            <DialogContent className="max-w-4xl p-0 bg-black/90">
-              <div className="p-1">
-                <img 
-                  src={image.src} 
-                  alt={image.alt}
-                  className="w-full h-auto max-h-[80vh] object-contain"
-                />
-              </div>
-            </DialogContent>
-          </Dialog>
-          {image.caption && (
-            <figcaption className="text-sm text-gray-500 mt-2 px-2">
-              {image.caption}
-            </figcaption>
-          )}
-        </figure>
-      </div>
-    );
+    return <SingleImageDisplay image={images[0]} />;
   }
 
   return (
@@ -121,78 +81,22 @@ const ImageCarousel = ({ images }: ImageCarouselProps) => {
           style={{ width: `${images.length * 100}%` }}
         >
           {images.map((image, index) => (
-            <Dialog key={index}>
-              <DialogTrigger asChild>
-                <figure 
-                  className="relative cursor-pointer group" 
-                  style={{ width: `${100 / images.length}%` }}
-                >
-                  <img 
-                    src={image.src} 
-                    alt={image.alt}
-                    className="w-full h-64 md:h-96 object-cover"
-                  />
-                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
-                    <Button variant="secondary" size="sm" className="flex items-center gap-1">
-                      <Maximize className="h-4 w-4" /> Ampliar
-                    </Button>
-                  </div>
-                  {image.caption && (
-                    <figcaption className="text-sm text-gray-500 mt-1 px-2 truncate">
-                      {image.caption}
-                    </figcaption>
-                  )}
-                </figure>
-              </DialogTrigger>
-              <DialogContent className="max-w-4xl p-0 bg-black/90">
-                <div className="p-1">
-                  <img 
-                    src={image.src} 
-                    alt={image.alt}
-                    className="w-full h-auto max-h-[80vh] object-contain"
-                  />
-                  {image.caption && (
-                    <p className="text-white/80 p-2 text-center">{image.caption}</p>
-                  )}
-                </div>
-              </DialogContent>
-            </Dialog>
+            <CarouselSlide 
+              key={index} 
+              image={image} 
+              width={`${100 / images.length}%`} 
+            />
           ))}
         </div>
       </div>
       
-      <Button 
-        variant="outline"
-        size="icon"
-        className="absolute top-1/2 left-2 transform -translate-y-1/2 rounded-full bg-white/80 hover:bg-white"
-        onClick={handlePrevious}
-        aria-label="Previous slide"
-      >
-        <ChevronLeft className="h-5 w-5" />
-      </Button>
-      
-      <Button 
-        variant="outline"
-        size="icon"
-        className="absolute top-1/2 right-2 transform -translate-y-1/2 rounded-full bg-white/80 hover:bg-white"
-        onClick={handleNext}
-        aria-label="Next slide"
-      >
-        <ChevronRight className="h-5 w-5" />
-      </Button>
-
-      <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-2">
-        {images.map((_, index) => (
-          <button
-            key={index}
-            className={`w-2 h-2 rounded-full ${
-              index === currentIndex ? 'bg-posthumous-gold' : 'bg-gray-300'
-            }`}
-            onClick={() => setCurrentIndex(index)}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
-      </div>
+      <CarouselNavigation 
+        handlePrevious={handlePrevious}
+        handleNext={handleNext}
+        currentIndex={currentIndex}
+        totalSlides={images.length}
+        onDotClick={setCurrentIndex}
+      />
     </div>
   );
 };
