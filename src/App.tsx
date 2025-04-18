@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import BiographyDetail from "./pages/BiographyDetail";
 import BiographyEdit from "./pages/BiographyEdit";
 import BiographyPost from "./pages/BiographyPost";
+import BiographySubmission from "./pages/BiographySubmission";
 import CategoryPage from "./pages/CategoryPage";
 import AlphabeticalBiographies from "./pages/AlphabeticalBiographies";
 import DeathsOnThisDay from "./pages/DeathsOnThisDay";
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/biografia/:id" element={<BiographyDetail />} />
           <Route path="/biografia/:id/editar" element={<BiographyEdit />} />
           <Route path="/postar-biografia" element={<BiographyPost />} />
+          <Route path="/enviar-biografia" element={<BiographySubmission />} />
           <Route path="/categoria/:slug" element={<CategoryPage />} />
           <Route path="/biografias" element={<AlphabeticalBiographies />} />
           <Route path="/mortes-neste-dia" element={<DeathsOnThisDay />} />
@@ -39,6 +41,7 @@ const App = () => (
           <Route path="/biography/:id" element={<BiographyDetail />} />
           <Route path="/biography/:id/edit" element={<BiographyEdit />} />
           <Route path="/post-biography" element={<BiographyPost />} />
+          <Route path="/submit-biography" element={<BiographySubmission />} />
           <Route path="/category/:slug" element={<CategoryPage />} />
           <Route path="/biographies" element={<AlphabeticalBiographies />} />
           <Route path="/deaths-on-this-day" element={<DeathsOnThisDay />} />

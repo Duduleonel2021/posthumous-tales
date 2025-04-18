@@ -32,17 +32,18 @@ const CategorySection = ({ title, categorySlug, biographies }: CategorySectionPr
   
   return (
     <section className="animate-fade-in">
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl md:text-3xl font-playfair font-bold text-posthumous-navy flex items-center">
-          <span className="inline-block w-12 h-1 bg-posthumous-gold mr-3 hidden md:inline-block"></span>
-          {React.cloneElement(icon as React.ReactElement, { className: "w-5 h-5 text-posthumous-gold mr-3 md:hidden" })}
+          <span className="inline-flex justify-center items-center w-10 h-10 bg-posthumous-gold/10 rounded-full text-posthumous-gold mr-3">
+            {React.cloneElement(icon as React.ReactElement, { className: "w-5 h-5" })}
+          </span>
           {title}
         </h2>
         <Link 
-          to={`/category/${categorySlug}`}
+          to={`/categoria/${categorySlug}`}
           className="flex items-center text-posthumous-navy hover:text-posthumous-gold transition-colors duration-300 group font-medium"
         >
-          <span className="mr-1">View All</span> 
+          <span className="mr-1">Ver Todos</span> 
           <ChevronRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
         </Link>
       </div>
