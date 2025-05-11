@@ -9,17 +9,24 @@ interface BiographyHeaderProps {
   pageUrl: string;
 }
 
-const BiographyHeader = ({ tags, pageUrl }: BiographyHeaderProps) => {
+const BiographyHeader = ({ title, tags, pageUrl }: BiographyHeaderProps) => {
   return (
-    <div>
-      {/* Tags Section */}
-      <TagsList tags={tags} showIcons={true} className="mb-6" />
+    <div className="mb-8">
+      <h1 className="text-3xl md:text-4xl font-bold font-playfair text-posthumous-navy mb-4">
+        {title}
+      </h1>
       
-      {/* Social Share Buttons */}
-      <SocialShareButtons 
-        title=""  // Title will be passed from parent
-        url={pageUrl}
-      />
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        {/* Tags Section */}
+        <TagsList tags={tags} showIcons={true} className="mb-0" />
+        
+        {/* Social Share Buttons */}
+        <SocialShareButtons 
+          title={title}
+          url={pageUrl}
+          className="!mt-0"
+        />
+      </div>
     </div>
   );
 };

@@ -36,7 +36,12 @@ const VideoEmbed = ({
     "Negócios": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
     "Educação": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1122&q=80",
     "Medicina": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-    "Tecnologia": "https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+    "Tecnologia": "https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+    // Adding more categories with specific images
+    "Filosofia": "https://images.unsplash.com/photo-1559300110-fb8b9e72c003?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80", 
+    "Arquitetura": "https://images.unsplash.com/photo-1481253127861-534498168948?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+    "Jornalismo": "https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80",
+    "Matemática": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
   };
 
   // Plano de fundo padrão se a categoria não for encontrada
@@ -57,17 +62,23 @@ const VideoEmbed = ({
         />
       )}
       
-      <div className="relative rounded-xl overflow-hidden">
-        {/* Plano de fundo específico para categoria */}
-        <div 
-          className="absolute inset-0 rounded-lg opacity-15 bg-cover bg-center" 
-          style={{ backgroundImage: `url(${backgroundImage})` }}
-        />
-        
-        <div className="relative z-10">
-          <VideoPlayer videoUrl={videoUrl} />
+      {videoUrl && (
+        <div className="relative rounded-xl overflow-hidden">
+          {/* Plano de fundo específico para categoria */}
+          <div 
+            className="absolute inset-0 rounded-lg opacity-15 bg-cover bg-center" 
+            style={{ backgroundImage: `url(${backgroundImage})` }}
+          />
+          
+          <div className="relative z-10">
+            <VideoPlayer 
+              videoUrl={videoUrl} 
+              title={`Vídeo sobre ${fullName}`}
+              category={category}
+            />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
