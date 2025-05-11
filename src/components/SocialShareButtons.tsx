@@ -12,9 +12,10 @@ import { toast } from "sonner";
 interface SocialShareButtonsProps {
   title: string;
   url: string;
+  className?: string;  // Added className as an optional prop
 }
 
-const SocialShareButtons = ({ title, url }: SocialShareButtonsProps) => {
+const SocialShareButtons = ({ title, url, className = "" }: SocialShareButtonsProps) => {
   // Encode the title and URL for sharing
   const encodedTitle = encodeURIComponent(title);
   const encodedUrl = encodeURIComponent(url);
@@ -25,7 +26,7 @@ const SocialShareButtons = ({ title, url }: SocialShareButtonsProps) => {
   };
 
   return (
-    <div className="flex items-center gap-2 my-4">
+    <div className={`flex items-center gap-2 my-4 ${className}`}>
       <span className="text-sm font-medium text-gray-500">Compartilhar:</span>
       
       <div className="flex items-center gap-2">
